@@ -1,0 +1,30 @@
+﻿<h1 class="mb-5 text-center">Registration Page</h1>
+<form>
+    <div class="mb-3">
+        <label for="role" class="col-sm-2 col-form-label">Select Role:</label>
+        <select class="col-sm-5" id="role" name="selectedRole">
+            <option value="user">Employee</option>
+            <option value="admin">User</option>
+        </select>
+    </div>
+    <div class="mb-3 row">
+        <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
+            <div class="col-sm-5">
+        <input type="text" class="form-control" id="UserName" placeholder="abcdefgh123">
+        </div>
+    </div>
+    <div class="mb-3 row">
+       <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-5">
+            <input type="password" class="form-control" id="inputPassword">
+        </div>
+    </div>
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-1 mb-3">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+            <div class="col-md-6 mt-1">
+                <a href="LoginView">Already have an account</a>
+            </div>
+        </div>
+</form>

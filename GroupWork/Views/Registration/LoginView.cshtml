@@ -1,0 +1,23 @@
+﻿<h1 class="mb-5 text-center">Login Page</h1>
+<form asp-controller="Registration" asp-action="Login" method="post">
+<div class="mb-3 row">
+    <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" id="UserName" name="UserName" placeholder="abcd123">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-5">
+        <input type="password" class="form-control" id="inputPassword" name="UserPassword">
+    </div>
+</div>
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        <div class="col-md-6">
+            <a href="RegistrationView">Dont Have an Account? Register</a>
+        </div>
+    </div>
+</form>
