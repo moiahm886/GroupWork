@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using GroupWork.Models
+@using GroupWork.Controllers
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,15 +28,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="RegistrationView">Home</a>
                         </li>
-                        @if (ViewData["IsAdminLogin"] as bool? == true)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="HandleEmployees">Handle Employees</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="HandleUsers">Handle Users</a>
-                            </li>
-                        }
+                        @await Html.PartialAsync("_NavigationView")
                     </ul>
                 </div>
             </div>

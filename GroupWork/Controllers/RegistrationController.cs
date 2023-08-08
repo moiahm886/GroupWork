@@ -17,7 +17,7 @@ namespace GroupWork.Controllers
         {
             if(RMC.UserPassword=="Admin" && RMC.UserName == "Admin")
             {
-                ViewData["IsAdminLogin"] = true;
+                ViewData["IsAdminRole"] = true;
                 return RedirectToAction("AdminView");
             }
             return RedirectToAction("LoginView");

@@ -1,5 +1,5 @@
 ﻿<h1 class="mb-5 text-center">Registration Page</h1>
-<form>
+<form asp-controller="Registration" asp-action="ManageRegistration">
     <div class="mb-3">
         <label for="role" class="col-sm-2 col-form-label">Select Role:</label>
         <select class="col-sm-5" id="role" name="selectedRole">
@@ -10,7 +10,7 @@
     <div class="mb-3 row">
         <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
             <div class="col-sm-5">
-        <input type="text" class="form-control" id="UserName" placeholder="abcdefgh123">
+        <input type="text" class="form-control" id="UserName" placeholder="abcd123">
         </div>
     </div>
     <div class="mb-3 row">
