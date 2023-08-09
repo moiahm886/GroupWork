@@ -2,21 +2,23 @@
 <form asp-controller="Registration" asp-action="ManageRegistration">
     <div class="mb-3">
         <label for="role" class="col-sm-2 col-form-label">Select Role:</label>
-        <select class="col-sm-5" id="role" name="selectedRole">
-            <option value="user">Employee</option>
-            <option value="admin">User</option>
+        <select class="col-sm-5" id="role" name="RoleName">
+            <option value="Employee">Employee</option>
+            <option value="User">User</option>
+            <option value="Company">Company</option>
+            <option value="CompanyBranch">CompanyBranch</option>
         </select>
     </div>
     <div class="mb-3 row">
         <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
             <div class="col-sm-5">
-        <input type="text" class="form-control" id="UserName" placeholder="abcd123">
+        <input type="text" class="form-control" id="UserName" name="UserName" placeholder="abcd123">
         </div>
     </div>
     <div class="mb-3 row">
        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-5">
-            <input type="password" class="form-control" id="inputPassword">
+            <input type="password" class="form-control" id="inputPassword" name="UserPassword">
         </div>
     </div>
         <div class="d-flex justify-content-center row">

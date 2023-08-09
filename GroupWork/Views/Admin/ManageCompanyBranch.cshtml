@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="mb-8 text-center">Manage Company Branch</h1>
+             <form asp-controller="Admin" asp-action="ManageApproval" method="post">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UserName</th>
+                        <th>UserPassword</th>
+                        <th>IsActive</th>
+                        <th>AddedBy</th>
+                        <th>AddedDate</th>
+                        <th>UpdatedBy</th>
+                        <th>UpdatedBy</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var Employees in Model)
+                        {
+                            <tr>
+                                <td>@Employees.ID</td>
+                                <td>@Employees.UserName</td>
+                                <td>@(Employees.UserPassword.Length > 10 ? Employees.UserPassword.Substring(0, 10) : Employees.UserPassword)</td>
+                                <td><input type="number" name="Active" class="form-control" /></td>
+                                <td><input type="text" name="AddedBy" class="form-control" /></td>
+                                <td><input type="date" name="AddedDate" class="form-control" /></td>
+                                <td><input type="text" name="UpdatedBy" class="form-control" /></td>
+                                <td><input type="date" name="UpdatedDate" class="form-control" /></td>
+                                <td>
+                                        @if (@Employees.AdminApproval)
+                                        {
+                                            <button type="submit" class="btn btn-primary" disabled>Approve</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-primary">Approve</button>
+                                        }
+                                    <input type="hidden" name="UserName" value="@Employees.UserName" />
+                                    <input type="hidden" name="UserID" value="@Employees.ID" />
+                                    <input type="hidden" name="UserPassword" value="@Employees.UserPassword" />
+                                        <input type="hidden" name="CurrentView" value="ManageCompanyBranch" />
+                                </td>
+                                <td><button type="submit" class="btn btn-danger" formaction="ManageRejection">Reject</button></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>

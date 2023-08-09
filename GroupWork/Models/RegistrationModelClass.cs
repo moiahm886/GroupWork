@@ -9,6 +9,8 @@ namespace GroupWork.Models
         public int ID { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
-        public string RoleID { get; set; }
+        public int RoleID { get; set; }
+        public bool AdminApproval { get; set; }
+        public string RoleName { get; set; }    
     }
 }

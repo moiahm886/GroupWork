@@ -20,4 +20,10 @@
             <a href="RegistrationView">Dont Have an Account? Register</a>
         </div>
     </div>
+    @if (ViewData["IsAwaitingApproval"] as bool? == true)
+    {
+        <div class="alert alert-info mt-3" role="alert">
+            Waiting for Admin Approval
+        </div>
+    }
 </form>

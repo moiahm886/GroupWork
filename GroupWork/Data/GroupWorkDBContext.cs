@@ -9,5 +9,6 @@ namespace GroupWork.Data
         {
         }
         public DbSet<RegistrationModelClass> Registration { get; set; }
+        public DbSet<AdminAllowanceModelClass>AdminTable { get; set; }
     }
 }
