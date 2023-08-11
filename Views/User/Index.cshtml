@@ -1,0 +1,42 @@
+﻿@model List<UserCrud.Model.UserModel>
+    
+@{
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Is Active</th>
+            <th>Employee ID</th>
+            <th>Role Id</th>
+            <th>Company Id</th>
+            <th>Branch Id</th>
+            <th>Added by</th>
+            <th>Added Date</th>
+            <th>Updated By</th>
+            <th>Updated Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.UserPassword</td>
+                <td>@user.IsActive</td>
+                <td>@user.EmpId</td>
+                <td>@user.RoleId</td>
+                <td>@user.CompanyId</td>
+                <td>@user.BranchId</td>
+                <td>@user.AddedBy</td>
+                <td>@user.AddedDate</td>
+                <td>@user.UpdatedBy</td>
+                <td>@user.UpdatedDate</td>
+                <td><a href="User/View/@user.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
