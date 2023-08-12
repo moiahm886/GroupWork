@@ -1,12 +1,10 @@
-﻿@using Microsoft.AspNetCore.Mvc
-@using GroupWork.Models
-@using GroupWork.Controllers
-@if (ViewData["IsAdminRole"] as bool? == true)
-{
+﻿
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Admin" asp-action="ManageEmployee">Handle Employees</a>
+        <a class="nav-link text-dark" asp-controller="User" asp-action="UserInfo">View Info</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Admin" asp-action="ManageUser">Handle Users</a>
-    </li>
-}
+<li class="nav-item">
+    <form asp-controller="User" asp-action="Logout" method="post" id="logoutForm">
+        <button type="submit" class="btn btn-link nav-link text-dark">Sign Out</button>
+    </form>
+</li>
+

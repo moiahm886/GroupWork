@@ -1,0 +1,83 @@
+﻿@model List<GroupWork.Models.RoleModel>
+@{
+    var perm = ViewData["Permission"] as string;
+}
+<h1 class="text-center mb-6">Manage Permissions</h1>
+<form asp-controller="Admin" asp-action="Permission">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role ID</th>
+                <th>Screen ID</th>
+                <th>Menu ID</th>
+                <th>Can Read</th>
+                <th>Can Update</th>
+                <th>Can Delete</th>
+                <th>Can Insert</th>
+                <th>Company ID</th>
+                <th>Branch ID</th>
+                <th>Added ID</th>
+                <th>Added Date</th>
+                <th>Updated By</th>
+                <th>Updated Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Id</td>
+                    <td><input type="number" name="ScreenId" class="form-control" /></td>
+                    <td><input type="number" name="MenuId" class="form-control" /></td>
+                    <td>
+                        <label class="toggle-label">
+                            <input type="checkbox" class="toggle-button" name="CanRead" value="1" (CanRead == 1 ? "checked" : "")>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="toggle-label">
+                            <input type="checkbox" class="toggle-button" name="CanUpdate" value="1" (CanUpdate == 1 ? "checked" : "")>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="toggle-label">
+                            <input type="checkbox" class="toggle-button" name="CanDelete" value="1" (CanDelete == 1 ? "checked" : "")>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="toggle-label">
+                            <input type="checkbox" class="toggle-button" name="CanInsert" value="1" (CanInsert == 1 ? "checked" : "")>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td><input type="number" name="CompanyId" class="form-control" /></td>
+                    <td><input type="number" name="BranchId" class="form-control" /></td>
+                    <td>@role.AddedBy</td>
+                    <td>@role.AddedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@role.UpdatedById</td>
+                    <td>@role.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>
+                        @if (perm != "Active")
+                        {
+                            <button type="submit" class="btn btn-dark">Add</button>
+                        }
+                        else{
+                        <button type="submit" class="btn btn-dark" disabled>Add</button>
+                        }
+                        <input type="hidden" name= "Id" value="@role.Id"/>
+                        <input type="hidden" name="AddedBy" value="@role.AddedBy"/>
+                        <input type="hidden" name="AddedId" value="@role.AddedDate"/>
+                        <input type="hidden" name="UpdatedById" value="@role.UpdatedById"/>
+                        <input type="hidden" name="UpdateDate" value="@role.UpdatedDate"/>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+

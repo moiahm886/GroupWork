@@ -1,0 +1,75 @@
+﻿@model GroupWork.Models.UserModel
+
+    <title>User Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .user-info-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info-label {
+            font-weight: bold;
+        }
+
+        .user-info-item {
+            margin-bottom: 10px;
+        }
+
+    .active {
+        color: green;
+    }
+
+    .inactive {
+        color: red;
+    }
+    </style>
+<body>
+    <div class="user-info-container">
+        <h1 class="text-center mb-4">User Information</h1>
+        <div class="user-info-item">
+            <span class="user-info-label">User ID:</span> @Model.Id
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Username:</span> @Model.UserName
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Active Status:</span>
+            <span class="active-status @(Model.IsActive == 1 ? "active" : "inactive")">
+                @(Model.IsActive == 1 ? "Active" : "Inactive")
+            </span>
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Employee ID:</span> @(Model.EmpId.HasValue ? Model.EmpId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Role ID:</span> @(Model.RoleId.HasValue ? Model.RoleId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Company ID:</span> @(Model.CompanyId.HasValue ? Model.CompanyId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Branch ID:</span> @(Model.BranchId.HasValue ? Model.BranchId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Added By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Added Date:</span> @(Model.AddedDate.ToString("yyyy-MM-dd HH:mm:ss"))
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Updated By:</span> @(Model.UpdatedBy.HasValue ? Model.UpdatedBy.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Updated Date:</span> @(Model.UpdatedDate.HasValue ? Model.UpdatedDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A")
+        </div>
+    </div>
+</body>
+</html>

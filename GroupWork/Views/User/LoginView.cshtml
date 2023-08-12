@@ -1,0 +1,26 @@
+﻿@{
+    var loginResult = ViewData["LoginResult"] as string;
+}
+
+<h1 class="mb-5 text-center">Login Page</h1>
+<form asp-controller="User" asp-action="ManageLogin" method="post">
+    <div class="mb-3 row">
+        <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="abcd123" required>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-5">
+            <input type="password" class="form-control" id="inputPassword" name="UserPassword" required>
+        </div>
+    </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    @if (!string.IsNullOrEmpty(loginResult))
+    {
+        <strong><p class="text-danger">@loginResult</p></strong>
+    }
+</form>

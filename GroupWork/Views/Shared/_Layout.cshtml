@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="~/GroupWork.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @{
+        var loginResult = ViewData["Authorized"] as string;
+        var user = ViewData["Username"] as string;
+    }
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -25,10 +29,26 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="RegistrationView">Home</a>
-                        </li>
-                        @await Html.PartialAsync("_NavigationView")
+                        @if (string.IsNullOrEmpty(loginResult))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LoginView">Home</a>
+                            </li>
+                        }
+                        @if (loginResult == "GuestUser")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="UserDashboard" asp-route-username="@user">Home</a>
+                            </li>
+                            @await Html.PartialAsync("_NavigationView")
+                        }
+                        @if(loginResult == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard" asp-route-username="@user">Home</a>
+                            </li>
+                            @await Html.PartialAsync("AdminNavBar")
+                        }
                     </ul>
                 </div>
             </div>
