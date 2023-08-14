@@ -28,11 +28,11 @@ namespace GroupWork.Models
         public int AddedId { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime AddedDate { get; set; }
+        public DateTime AddedDate { get; set; } = DateTime.Now;
 
         public int UpdatedBy { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime UpdatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
     }
 }

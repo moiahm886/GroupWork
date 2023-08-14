@@ -1,9 +1,6 @@
-﻿@model List<GroupWork.Models.RoleModel>
-@{
-    var perm = ViewData["Permission"] as string;
-}
+﻿@model (List<RoleModel> Roles, Dictionary<int, PermissionModel> RolePermissions)
 <h1 class="text-center mb-6">Manage Permissions</h1>
-<form asp-controller="Admin" asp-action="Permission">
+<form form method="post" asp-controller="Admin" asp-action="Permission">
     <table class="table">
         <thead>
             <tr>
@@ -21,15 +18,36 @@
                 <th>Updated By</th>
                 <th>Updated Date</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var role in Model)
+            @foreach (var role in Model.Roles)
             {
                 <tr>
                     <td>@role.Id</td>
-                    <td><input type="number" name="ScreenId" class="form-control" /></td>
-                    <td><input type="number" name="MenuId" class="form-control" /></td>
+                    <td>
+                        @if (!Model.RolePermissions.ContainsKey(role.Id))
+                        {
+                            <input type="number" name="ScreenId" class="form-control"/>
+                        }
+                        else
+                        {
+                            var permission = Model.RolePermissions[role.Id];
+                            <span>@permission.ScreenId</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!Model.RolePermissions.ContainsKey(role.Id))
+                        {
+                            <input type="number" name="MenuId" class="form-control"/>
+                        }
+                        else
+                        {
+                            var permission = Model.RolePermissions[role.Id];
+                            <span>@permission.MenuId</span>
+                        }
+                    </td>
                     <td>
                         <label class="toggle-label">
                             <input type="checkbox" class="toggle-button" name="CanRead" value="1" (CanRead == 1 ? "checked" : "")>
@@ -54,16 +72,36 @@
                             <span class="slider round"></span>
                         </label>
                     </td>
-                    <td><input type="number" name="CompanyId" class="form-control" /></td>
-                    <td><input type="number" name="BranchId" class="form-control" /></td>
+                    <td>
+                        @if (!Model.RolePermissions.ContainsKey(role.Id))
+                        {
+                            <input type="number" name="CompanyId" class="form-control"  />
+                        }
+                        else
+                        {
+                            var permission = Model.RolePermissions[role.Id];
+                            <span>@permission.CompanyId</span>
+                        }
+                    </td>
+                    <td>
+                        @if (!Model.RolePermissions.ContainsKey(role.Id))
+                        {
+                            <input type="number" name="BranchId" class="form-control"/>
+                        }
+                        else
+                        {
+                            var permission = Model.RolePermissions[role.Id];
+                            <span>@permission.BranchId</span>
+                        }
+                    </td>
                     <td>@role.AddedBy</td>
                     <td>@role.AddedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                     <td>@role.UpdatedById</td>
                     <td>@role.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                     <td>
-                        @if (perm != "Active")
+                        @if (!Model.RolePermissions.ContainsKey(role.Id))
                         {
-                            <button type="submit" class="btn btn-dark">Add</button>
+                            <button type="submit" class="btn btn-dark" formaction="Permission">Add</button>
                         }
                         else{
                         <button type="submit" class="btn btn-dark" disabled>Add</button>
@@ -73,6 +111,22 @@
                         <input type="hidden" name="AddedId" value="@role.AddedDate"/>
                         <input type="hidden" name="UpdatedById" value="@role.UpdatedById"/>
                         <input type="hidden" name="UpdateDate" value="@role.UpdatedDate"/>
+                    </td>
+                    <td>
+                        @if (Model.RolePermissions.ContainsKey(role.Id))
+                        {
+                            var permission = Model.RolePermissions[role.Id];
+                            <button type="submit" class="btn btn-secondary" formaction="UpdatePermission">Update</button>
+                            <input type="hidden" name="RoleId" value="@role.Id" />
+                            <input type="hidden" name="AddedBy" value="@role.AddedBy" />
+                            <input type="hidden" name="AddedId" value="@role.AddedDate" />
+                            <input type="hidden" name="UpdatedById" value="@role.UpdatedById" />
+                            <input type="hidden" name="UpdateDate" value="@role.UpdatedDate" />
+                            <input type= "hidden" name= "BranchId" value="@permission.BranchId"/>
+                            <input type="hidden" name="CompanyId" value="@permission.CompanyId" />
+                            <input type="hidden" name="MenuId" value="@permission.MenuId" />
+                            <input type="hidden" name="ScreenId" value="@permission.ScreenId" />
+                        }
                     </td>
                 </tr>
             }

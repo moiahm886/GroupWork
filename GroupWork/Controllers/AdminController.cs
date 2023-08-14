@@ -3,6 +3,8 @@ using GroupWork.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.Design;
+using System.Data;
+using System.Security;
 
 namespace GroupWork.Controllers
 {
@@ -35,6 +37,23 @@ namespace GroupWork.Controllers
             ViewData["Authorized"] = "Admin";
             return View("AddUsers");
         }
+        [HttpPost]
+        public async Task<IActionResult> UpdatePermission(PermissionModel permissionModel)
+        {
+            var existingPermission = await managementDataContextClass.tbPermissions.FirstOrDefaultAsync(r => r.RoleId == permissionModel.RoleId);
+
+            if (existingPermission != null)
+            {
+                existingPermission.CanRead = Convert.ToInt32(permissionModel.CanRead == 1 || permissionModel.CanUpdate == 1 || permissionModel.CanDelete == 1 || permissionModel.CanInsert == 1);
+                existingPermission.CanUpdate = permissionModel.CanUpdate == 1 ? 1 : 0;
+                existingPermission.CanDelete = permissionModel.CanDelete == 1 ? 1 : 0;
+                existingPermission.CanInsert = permissionModel.CanInsert == 1 ? 1 : 0;
+                managementDataContextClass.tbPermissions.Update(existingPermission);
+                await managementDataContextClass.SaveChangesAsync();
+            }
+            return RedirectToAction("ManagePermission");
+        }
+
         public IActionResult AddUsers()
         {
             ViewData["Authorized"] = "Admin";
@@ -64,7 +83,65 @@ namespace GroupWork.Controllers
             ViewData["Authorized"] = "Admin";
             return View();
         }
-        public IActionResult ManageUsers()
+        public async Task<IActionResult> ManageUsers()
+        {
+            var user = await managementDataContextClass.tbUsers.ToListAsync();
+            ViewData["Authorized"] = "Admin";
+            return View(user);
+        }
+        public async Task<IActionResult> UpdateUser(UserModel usermodel)
+        {
+            var user = await managementDataContextClass.tbUsers.FirstOrDefaultAsync(x => x.Id == usermodel.Id);
+            if (user != null)
+            { 
+                user.UserPassword = usermodel.UserPassword;
+                user.IsActive = usermodel.IsActive;
+                user.RoleId = usermodel.RoleId;
+                user.BranchId = usermodel.BranchId;
+                user.CompanyId = usermodel.CompanyId;
+                user.UpdatedBy = usermodel.UpdatedBy;
+                user.UpdatedDate = DateTime.Now;
+                managementDataContextClass.tbUsers.Update(user);
+                await managementDataContextClass.SaveChangesAsync();
+            }
+            return RedirectToAction("ManageUsers");
+        }
+        public async Task<IActionResult> DeleteUser(UserModel usermodel)
+        {
+            var user = await managementDataContextClass.tbUsers.FirstOrDefaultAsync(x => x.Id == usermodel.Id);
+            if(user!= null)
+            {
+                managementDataContextClass.tbUsers.Remove(user);
+                await managementDataContextClass.SaveChangesAsync();
+            }
+            return RedirectToAction("ManageUsers");
+        }
+        [HttpGet]
+        public async Task<IActionResult> ViewUser(int id)
+        {
+            var user = await  managementDataContextClass.tbUsers.FirstOrDefaultAsync(x => x.Id == id);
+            if (user != null)
+            {
+                var Viewuser = new UserModel()
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    UserPassword = user.UserPassword,
+                    IsActive = user.IsActive,
+                    EmpId = user.EmpId,
+                    RoleId = user.RoleId,
+                    CompanyId = user.CompanyId,
+                    BranchId = user.BranchId,
+                    AddedBy = user.AddedBy,
+                    AddedDate = user.AddedDate,
+                    UpdatedBy = user.UpdatedBy,
+                    UpdatedDate = user.UpdatedDate
+                };
+                return View(Viewuser);
+            }
+            return RedirectToAction("ManageUsers");
+        }
+        public IActionResult ManageCompany()
         {
             ViewData["Authorized"] = "Admin";
             return View();
@@ -76,9 +153,19 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> ManagePermission()
         {
-            var role = await managementDataContextClass.tbRoles.ToListAsync();
+            var roles = await managementDataContextClass.tbRoles.ToListAsync();
+            var rolePermissions = new Dictionary<int, PermissionModel>();
+
+            foreach (var roleModel in roles)
+            {
+                var check = await managementDataContextClass.tbPermissions.FirstOrDefaultAsync(r => r.RoleId == roleModel.Id);
+                if (check != null)
+                {
+                    rolePermissions[roleModel.Id] = check;
+                }
+            }
             ViewData["Authorized"] = "Admin";
-            return View(role);
+            return View((roles, rolePermissions));
         }
         public IActionResult Logout()
         {
@@ -88,7 +175,7 @@ namespace GroupWork.Controllers
         {
             var permission = new PermissionModel
             {
-                RoleId = permissionModel.RoleId,
+                RoleId = permissionModel.Id,
                 MenuId = permissionModel.MenuId,
                 ScreenId = permissionModel.ScreenId,
                 CanUpdate = permissionModel.CanUpdate,
@@ -104,12 +191,7 @@ namespace GroupWork.Controllers
             };
             await managementDataContextClass.tbPermissions.AddAsync(permission);
             await managementDataContextClass.SaveChangesAsync();
-            var perm = await managementDataContextClass.tbPermissions.FindAsync(permission.RoleId);
-            if (perm != null)
-            {
-                ViewData["Permission"] = "Active";
-            }
-            return View("ManagePermission");
+            return RedirectToAction("ManagePermission");
         }
     }
 }
