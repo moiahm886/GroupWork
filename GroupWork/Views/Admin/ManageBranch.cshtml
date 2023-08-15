@@ -1,1 +1,45 @@
-﻿<h1 class="text-center">Manage Branch</h1>
+﻿@model List<GroupWork.Models.BranchModel>
+
+<h1 class="text-center">Manage Branch</h1>
+<form style="overflow:auto" asp-controller="Admin" asp-action="DeleteBranch">
+    <table class="table" style="border: 1px solid #F5F5DC; border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="border-bottom: 1px solid #F5F5DC;">
+                <th style="border: 1px solid #F5F5DC;">ID</th>
+                <th style="border: 1px solid #F5F5DC;">Company ID</th>
+                <th style="border: 1px solid #F5F5DC;">Name</th>
+                <th style="border: 1px solid #F5F5DC;">City ID</th>
+                <th style="border: 1px solid #F5F5DC;">Country ID</th>
+                <th style="border: 1px solid #F5F5DC;">Address</th>
+                <th style="border: 1px solid #F5F5DC;">Phone</th>
+                <th style="border: 1px solid #F5F5DC;">Added By</th>
+                <th style="border: 1px solid #F5F5DC;">Added Date</th>
+                <th style="border: 1px solid #F5F5DC;">Updated By</th>
+                <th style="border: 1px solid #F5F5DC;">Updated Date</th>
+                <th style="border: 1px solid #F5F5DC;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var branch in Model)
+            {
+                <tr>
+                    <td style="border: 1px solid #F5F5DC;">@branch.Id</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.CompanyId</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.Name</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.CityId</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.CountryId</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.Address</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.Phone</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.AddedBy</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.AddedDate</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.UpdatedBy</td>
+                    <td style="border: 1px solid #F5F5DC;">@branch.UpdatedDate</td>
+                    <td style="border: 1px solid #F5F5DC;">
+                            <input type="hidden" name="Id" value="@branch.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</for>

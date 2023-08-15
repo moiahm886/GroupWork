@@ -1,1 +1,56 @@
-﻿<h1 class="text-center">Manage Company</h1>
+﻿@model List<GroupWork.Models.CompanyModel>
+<h1 class="text-center">Manage Company</h1>
+<form style="overflow:auto" asp-controller="Admin" asp-action="DeleteCompany">
+    <table class="table" style="border: 1px solid #F5F5DC; border-collapse: collapse; width: 100%; border-spacing: 0;">
+        <thead>
+            <tr style="border-bottom: 1px solid #F5F5DC;">
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">ID</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">Name</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">Address</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">Email</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">ContactNo</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">FaxNo</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">Logo</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">CountryId</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">CityId</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">BankName</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">BankIban</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">IsActive</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">AddedBy</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">AddedDate</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">UpdatedBy</th>
+                <th style="border: 1px solid #F5F5DC; padding: 8px;">UpdatedDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comp in Model)
+            {
+                <tr style="border-bottom: 1px solid #F5F5DC;">
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.Id</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.Name</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.Address</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.Email</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.ContactNo</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.FaxNo</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.Logo</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.CountryId</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.CityId</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.BankName</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.BankIban</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@(comp.IsActive == 1 ? "Active" : "Inactive")</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.AddedBy</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.AddedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.UpdatedBy</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td style="border: 1px solid #F5F5DC;">
+                            <input type="hidden" name="Id" value="@comp.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+</form>

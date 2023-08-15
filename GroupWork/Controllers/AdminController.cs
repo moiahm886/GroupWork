@@ -142,16 +142,58 @@ namespace GroupWork.Controllers
             }
             return RedirectToAction("ManageUsers");
         }
-        public IActionResult ManageCompany()
+        public async Task<IActionResult> ManageCompany()
+        {
+            ViewData["Authorized"] = "Company";
+            var company = await managementDataContextClass.Company.ToListAsync();
+            return View(company);
+        }
+        public IActionResult AddCompany()
         {
             ViewData["Authorized"] = "Company";
             return View();
         }
-        public async Task<IActionResult> AddCompany()
+        public async Task<IActionResult> CompanyAddition(CompanyModel companyModel)
         {
-            ViewData["Authorized"] = "Company";
-            return View();
+            var Company = new CompanyModel
+            {
+                Name = companyModel.Name,
+                Address = companyModel.Address,
+                Email = companyModel.Email,
+                ContactNo = companyModel.ContactNo,
+                FaxNo = companyModel.FaxNo,
+                Logo = companyModel.Logo,
+                CountryId = companyModel.CountryId,
+                CityId = companyModel.CityId,
+                BankName = companyModel.BankName,
+                BankIban = companyModel.BankIban,
+                IsActive = companyModel.IsActive,
+                AddedBy = companyModel.AddedBy,
+                AddedDate = DateTime.Now,
+                UpdatedBy = companyModel.UpdatedBy,
+                UpdatedDate = DateTime.Now
+            };
+            await managementDataContextClass.Company.AddAsync(Company);
+            await managementDataContextClass.SaveChangesAsync();
+            return RedirectToAction("ManageCompany");
         }
+        public async Task<IActionResult> DeleteCompany(int ID)
+        {
+            var company = await managementDataContextClass.Company.FindAsync(ID);
+
+            if (company != null)
+            {
+                managementDataContextClass.Company.Remove(company);
+                var branches = await managementDataContextClass.CompanyBranch.Where(b => b.CompanyId == ID).ToListAsync();
+                if (branches.Count > 0)
+                {
+                    managementDataContextClass.CompanyBranch.RemoveRange(branches);
+                }
+                await managementDataContextClass.SaveChangesAsync();
+            }
+            return RedirectToAction("ManageCompany");
+        }
+
         public IActionResult ManageEmployees()
         {
             ViewData["Authorized"] = "Admin";
@@ -179,8 +221,52 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> ManageBranch()
         {
+            var branch = await managementDataContextClass.CompanyBranch.ToListAsync();
+            ViewData["Authorized"] = "Branch";
+            return View(branch);
+        }
+        public IActionResult AddBranch()
+        {
             ViewData["Authorized"] = "Branch";
             return View();
+        }
+        public async Task<IActionResult> BranchAddition(BranchModel branchModel)
+        {
+            var branch = await managementDataContextClass.Company.FirstOrDefaultAsync(r=>r.Id==branchModel.CompanyId);
+            if (branch != null)
+            {
+                var Branchinfo = new BranchModel
+                {
+                    CompanyId = branchModel.CompanyId,
+                    Name = branchModel.Name,
+                    CityId = branchModel.CityId,
+                    CountryId = branchModel.CountryId,
+                    Address = branchModel.Address,
+                    Phone = branchModel.Phone,
+                    AddedBy = branchModel.AddedBy,
+                    AddedDate = branchModel.AddedDate,
+                    UpdatedBy = branchModel.UpdatedBy,
+                    UpdatedDate = branchModel.UpdatedDate,
+
+                };
+                await managementDataContextClass.CompanyBranch.AddAsync(Branchinfo);
+                await managementDataContextClass.SaveChangesAsync();
+                return RedirectToAction("ManageBranch");
+            }
+            else
+            {
+                return View("AddBranch");
+            }
+        }
+        public async Task<IActionResult> DeleteBranch(int ID)
+        {
+            var branch = await managementDataContextClass.CompanyBranch.FindAsync(ID);
+            if (branch != null)
+            {
+                managementDataContextClass.CompanyBranch.Remove(branch);
+                await managementDataContextClass.SaveChangesAsync();
+            }
+            return RedirectToAction("ManageBranch");
         }
         public async Task<IActionResult> Permission(PermissionModel permissionModel)
         {

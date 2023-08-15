@@ -1,1 +1,69 @@
-﻿
+﻿<h1 class="text-center mb-5">Add Company</h1>
+<form asp-controller="Admin" asp-action="CompanyAddition" method="post">
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="Name" name="Name" required>
+    </div>
+    <div class="mb-3">
+        <label for="Address" class="form-label">Address:</label>
+        <input type="text" class="form-control" id="Address" name="Address" required>
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="Email" name="Email" required>
+    </div>
+    <div class="mb-3">
+        <label for="ContactNo" class="form-label">Contact No:</label>
+        <input type="tel" class="form-control" id="ContactNo" name="ContactNo">
+    </div>
+    <div class="mb-3">
+        <label for="FaxNo" class="form-label">Fax No:</label>
+        <input type="tel" class="form-control" id="FaxNo" name="FaxNo">
+    </div>
+    <div class="mb-3">
+        <label for="Logo" class="form-label">Logo:</label>
+        <input type="text" class="form-control" id="Logo" name="Logo">
+    </div>
+    <div class="mb-3">
+        <label for="CountryId" class="form-label">Country ID:</label>
+        <input type="number" class="form-control" id="CountryId" name="CountryId">
+    </div>
+    <div class="mb-3">
+        <label for="CityId" class="form-label">City ID:</label>
+        <input type="number" class="form-control" id="CityId" name="CityId">
+    </div>
+    <div class="mb-3">
+        <label for="BankName" class="form-label">Bank Name:</label>
+        <input type="text" class="form-control" id="BankName" name="BankName">
+    </div>
+    <div class="mb-3">
+        <label for="BankIban" class="form-label">Bank Iban:</label>
+        <input type="text" class="form-control" id="BankIban" name="BankIban">
+    </div>
+    <div class="form-group row mb-3">
+        <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
+        <div class="col-sm-5">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
+                <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="AddedBy" class="form-label">Added By:</label>
+        <input type="number" class="form-control" id="AddedBy" name="AddedBy">
+    </div>
+    <div class="mb-3">
+        <label for="AddedDate" class="form-label">Added Date:</label>
+        <input type="datetime-local" class="form-control" id="AddedDate" name="AddedDate">
+    </div>
+    <div class="mb-3">
+        <label for="UpdatedBy" class="form-label">Updated By:</label>
+        <input type="number" class="form-control" id="UpdatedBy" name="UpdatedBy">
+    </div>
+    <div class="mb-3">
+        <label for="UpdatedDate" class="form-label">Updated Date:</label>
+        <input type="datetime-local" class="form-control" id="UpdatedDate" name="UpdatedDate">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Company</button>
+</form>
