@@ -59,6 +59,7 @@ namespace GroupWork.Controllers
         {
             HttpContext.Session.SetString("UserName", username);
             ViewData["Authorized"] = "GuestUser";
+            ViewData["Username"] = username;
             return View();
         }
         public IActionResult AdminDashboard()

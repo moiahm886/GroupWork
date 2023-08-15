@@ -119,6 +119,7 @@ namespace GroupWork.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewUser(int id)
         {
+            ViewData["Authorized"] = "Admin";
             var user = await  managementDataContextClass.tbUsers.FirstOrDefaultAsync(x => x.Id == id);
             if (user != null)
             {
@@ -143,7 +144,12 @@ namespace GroupWork.Controllers
         }
         public IActionResult ManageCompany()
         {
-            ViewData["Authorized"] = "Admin";
+            ViewData["Authorized"] = "Company";
+            return View();
+        }
+        public async Task<IActionResult> AddCompany()
+        {
+            ViewData["Authorized"] = "Company";
             return View();
         }
         public IActionResult ManageEmployees()
@@ -171,6 +177,11 @@ namespace GroupWork.Controllers
         {
             return RedirectToAction("LoginView", "User");
         }
+        public async Task<IActionResult> ManageBranch()
+        {
+            ViewData["Authorized"] = "Branch";
+            return View();
+        }
         public async Task<IActionResult> Permission(PermissionModel permissionModel)
         {
             var permission = new PermissionModel
@@ -189,8 +200,16 @@ namespace GroupWork.Controllers
                 UpdatedBy = permissionModel.UpdatedBy,
                 UpdatedDate = permissionModel.UpdatedDate,
             };
-            await managementDataContextClass.tbPermissions.AddAsync(permission);
-            await managementDataContextClass.SaveChangesAsync();
+            var perm = await managementDataContextClass.tbPermissions.FirstOrDefaultAsync(r => r.RoleId == permissionModel.Id);
+            if (perm == null)
+            {
+                await managementDataContextClass.tbPermissions.AddAsync(permission);
+                await managementDataContextClass.SaveChangesAsync();
+            }
+            else
+            {
+                ViewData["permission"] = "Exist";
+            }
             return RedirectToAction("ManagePermission");
         }
     }

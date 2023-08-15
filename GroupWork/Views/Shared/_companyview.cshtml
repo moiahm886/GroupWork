@@ -1,0 +1,11 @@
+﻿<li class="nav-item">
+    <a class="nav-link text-dark" asp-controller="Admin" asp-action="AddCompany">Add Company</a>
+</li>
+<li class="nav-item">
+    <a href="@Url.Action("Logout", "Admin")" class="nav-link text-dark" onclick="return confirmLogout();">Logout</a>
+</li>
+<script>
+    function confirmLogout() {
+        return confirm("Are you sure you want to log out?");
+    }
+</script>

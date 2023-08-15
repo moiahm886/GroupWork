@@ -49,6 +49,20 @@
                             </li>
                             @await Html.PartialAsync("AdminNavBar")
                         }
+                        @if (loginResult == "Company")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard" asp-route-username="@user">Home</a>
+                            </li>
+                            @await Html.PartialAsync("_companyview");
+                        }
+                        @if (loginResult == "Branch")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard" asp-route-username="@user">Home</a>
+                            </li>
+                            @await Html.PartialAsync("_branch");
+                        }
                     </ul>
                 </div>
             </div>
