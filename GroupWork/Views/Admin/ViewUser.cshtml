@@ -1,8 +1,9 @@
 ﻿@model GroupWork.Models.UserModel
-
+@section content {
 
     <div class="container mt-5">
         <h1 class="text-center mb-6">View User Details</h1>
+        <div class="ml-4">
         <form>
         <div class="mb-3">
             <label for="UserName" class="form-label">ID</label>
@@ -60,4 +61,6 @@
             </div>
             <a href="@Url.Action("ManageUsers", "Admin")" class="btn btn-secondary mt-4">Back to User List</a>
         </form>
+        </div>
     </div>
+    }

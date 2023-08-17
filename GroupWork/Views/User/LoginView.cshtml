@@ -1,8 +1,9 @@
 ﻿@{
     var loginResult = ViewData["LoginResult"] as string;
 }
-
+@section content {
 <h1 class="mb-5 text-center">Login Page</h1>
+<div class="ml-4">
 <form asp-controller="User" asp-action="ManageLogin" method="post">
     <div class="mb-3 row">
         <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
@@ -24,3 +25,5 @@
         <strong><p class="text-danger">@loginResult</p></strong>
     }
 </form>
+</div>
+}

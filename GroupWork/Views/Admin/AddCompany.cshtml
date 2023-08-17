@@ -1,4 +1,11 @@
-﻿<h1 class="text-center mb-5">Add Company</h1>
+﻿@section content {
+<h1 class="text-center mb-5">Add Company</h1>
+<head>
+        <link href="https://cdn.jsdelivr.net/npm/switchery@0.8.2/dist/switchery.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/switchery@0.8.2/dist/switchery.min.js"></script>
+
+</head>
+<div class="ml-4">
 <form asp-controller="Admin" asp-action="CompanyAddition" method="post">
     <div class="mb-3">
         <label for="Name" class="form-label">Name:</label>
@@ -40,15 +47,16 @@
         <label for="BankIban" class="form-label">Bank Iban:</label>
         <input type="text" class="form-control" id="BankIban" name="BankIban">
     </div>
-    <div class="form-group row mb-3">
-        <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
-        <div class="col-sm-5">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
-                <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
+            <div class="form-group row mb-3">
+                <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
+                <div class="col-sm-5">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
+                        <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+
     <div class="mb-3">
         <label for="AddedBy" class="form-label">Added By:</label>
         <input type="number" class="form-control" id="AddedBy" name="AddedBy">
@@ -67,3 +75,50 @@
     </div>
     <button type="submit" class="btn btn-primary">Add Company</button>
 </form>
+</div>
+
+}
+<style>
+    input[type="checkbox"] {
+        position: relative;
+        width: 40px; /* Half the width */
+        height: 20px; /* Half the height */
+        -webkit-appearance: none;
+        appearance: none;
+        background: red;
+        outline: none;
+        border-radius: 0.85rem; /* Half the border-radius */
+        cursor: pointer;
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+    }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 20px; /* Half the width */
+            height: 20px; /* Half the height */
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: translateX(100%);
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #00ed64;
+        }
+
+    /* Additional style for the checkbox */
+    .sliding-checkbox {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+</style>

@@ -1,4 +1,6 @@
 ﻿@model List<GroupWork.Models.UserModel>
+@section content {
+    <div class="table-container">
 <table class="table">
     <thead>
         <tr>
@@ -37,5 +39,12 @@
 
         }
     </tbody>
-
 </table>
+</div>
+}
+<style>
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+</style>

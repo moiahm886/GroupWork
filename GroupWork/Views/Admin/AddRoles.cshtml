@@ -1,6 +1,7 @@
 ﻿@model GroupWork.Models.RoleModel
-
+@section content {
 <h1 class="text-center mb-5">Add Role</h1>
+<div class="ml-4">
 <form asp-controller="Admin" asp-action="Roles" method="post">
      <div class="form-group row mb-3">
         <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
@@ -63,3 +64,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Add Role</button>
 </form>
+</div>
+}

@@ -1,6 +1,12 @@
-﻿@model List<GroupWork.Models.BranchModel>
-
+﻿@{
+    var check = ViewData["Added"] as string;
+}
+@section content {
 <h1 class="text-center">Manage Branch</h1>
+@if (check == "Done")
+{
+   <p class="text-bg-danger">Added Successfully</p>
+}
 <form style="overflow:auto" asp-controller="Admin" asp-action="DeleteBranch">
     <table class="table" style="border: 1px solid #F5F5DC; border-collapse: collapse; width: 100%;">
         <thead>
@@ -42,4 +48,8 @@
             }
         </tbody>
     </table>
-</for>
+</form>
+}
+
+
+

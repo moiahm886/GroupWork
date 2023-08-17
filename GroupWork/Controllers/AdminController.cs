@@ -221,6 +221,10 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> ManageBranch()
         {
+            if (TempData.ContainsKey("Message"))
+            {
+                ViewData["Added"] = TempData["Message"];
+            }
             var branch = await managementDataContextClass.CompanyBranch.ToListAsync();
             ViewData["Authorized"] = "Branch";
             return View(branch);
@@ -251,6 +255,7 @@ namespace GroupWork.Controllers
                 };
                 await managementDataContextClass.CompanyBranch.AddAsync(Branchinfo);
                 await managementDataContextClass.SaveChangesAsync();
+                TempData["Message"] = "Done";
                 return RedirectToAction("ManageBranch");
             }
             else

@@ -1,5 +1,8 @@
-﻿@model (List<RoleModel> Roles, Dictionary<int, PermissionModel> RolePermissions)
+﻿
+@model (List<RoleModel> Roles, Dictionary<int, PermissionModel> RolePermissions)
+@section content {
 <h1 class="text-center mb-6">Manage Permissions</h1>
+    <div class="ml-4 table-container">
 <form form method="post" asp-controller="Admin" asp-action="Permission">
     <table class="table" style="border: 1px solid #ccc; border-collapse: collapse; width: 100%;">
         <thead>
@@ -48,30 +51,29 @@
                             <span>@permission.MenuId</span>
                         }
                     </td>
-                    <td>
-                        <label class="toggle-label">
-                            <input type="checkbox" class="toggle-button" name="CanRead" value="1" (CanRead == 1 ? "checked" : "")>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="toggle-label">
-                            <input type="checkbox" class="toggle-button" name="CanUpdate" value="1" (CanUpdate == 1 ? "checked" : "")>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="toggle-label">
-                            <input type="checkbox" class="toggle-button" name="CanDelete" value="1" (CanDelete == 1 ? "checked" : "")>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <label class="toggle-label">
-                            <input type="checkbox" class="toggle-button" name="CanInsert" value="1" (CanInsert == 1 ? "checked" : "")>
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
+                            <td>
+                                <label class="toggle-label">
+                                    <input type="checkbox" class="toggle-button" name="CanRead" value="1" (CanRead == 1 ? "checked" : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="toggle-label">
+                                    <input type="checkbox" class="toggle-button" name="CanUpdate" value="1" (CanUpdate == 1 ? "checked" : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="toggle-label">
+                                    <input type="checkbox" class="toggle-button" name="CanDelete" value="1" (CanDelete == 1 ? "checked" : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="toggle-label">
+                                    <input type="checkbox" class="toggle-button" name="CanInsert" value="1" (CanInsert == 1 ? "checked" : "")>
+                                    <span class="slider round"></span>
+                                </label>
                     <td>
                         @if (!Model.RolePermissions.ContainsKey(role.Id))
                         {
@@ -133,5 +135,56 @@
         </tbody>
     </table>
 </form>
+</div>
+}
+<style>
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+</style>
+<style>
+    input[type="checkbox"] {
+        position: relative;
+        width: 40px; /* Half the width */
+        height: 20px; /* Half the height */
+        -webkit-appearance: none;
+        appearance: none;
+        background: orange;
+        outline: none;
+        border-radius: 0.85rem; /* Half the border-radius */
+        cursor: pointer;
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+    }
 
+        input[type="checkbox"]::before {
+            content: "";
+            width: 20px; /* Half the width */
+            height: 20px; /* Half the height */
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: translateX(100%);
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #00ed64;
+        }
+
+    /* Additional style for the checkbox */
+    .sliding-checkbox {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+</style>
 
