@@ -1,50 +1,78 @@
 ﻿@model GroupWork.Models.CompanyModel
-@section content {
 <h1 class="text-center mb-4">Add Company Branch</h1>
 <div class="ml-4">
 <form asp-controller="Admin" asp-action="BranchAddition" method="post">
     
     <div class="mb-3">
         <label for="CompanyId" class="form-label">Company ID</label>
-        <input type="number" class="form-control" id="CompanyId" name="CompanyId" required>
+            <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId" required>
     </div>
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="Name" name="Name" required>
+            <input type="text" class="form-control custom-input" id="Name" name="Name" required>
     </div>
     <div class="mb-3">
         <label for="CityId" class="form-label">City ID</label>
-        <input type="number" class="form-control" id="CityId" name="CityId" required>
+            <input type="number" class="form-control custom-input" id="CityId" name="CityId" required>
     </div>
     <div class="mb-3">
         <label for="CountryId" class="form-label">Country ID</label>
-        <input type="number" class="form-control" id="CountryId" name="CountryId" required>
+            <input type="number" class="form-control custom-input" id="CountryId" name="CountryId" required>
     </div>
     <div class="mb-3">
         <label for="Address" class="form-label">Address</label>
-        <input type="text" class="form-control" id="Address" name="Address" required>
+            <input type="text" class="form-control custom-input" id="Address" name="Address" required>
     </div>
     <div class="mb-3">
         <label for="Phone" class="form-label">Phone</label>
-        <input type="tel" class="form-control" id="Phone" name="Phone" required>
+            <input type="tel" class="form-control custom-input" id="Phone" name="Phone" required>
     </div>
     <div class="mb-3">
         <label for="AddedBy" class="form-label">Added By</label>
-        <input type="number" class="form-control" id="AddedBy" name="AddedBy" required>
+            <input type="number" class="form-control custom-input" id="AddedBy" name="AddedBy" required>
     </div>
     <div class="mb-3">
         <label for="AddedDate" class="form-label">Added Date</label>
-        <input type="datetime-local" class="form-control" id="AddedDate" name="AddedDate" required>
+            <input type="datetime-local" class="form-control custom-input" id="AddedDate" name="AddedDate" required>
     </div>
     <div class="mb-3">
         <label for="UpdatedBy" class="form-label">Updated By</label>
-        <input type="number" class="form-control" id="UpdatedBy" name="UpdatedBy" required>
+            <input type="number" class="form-control custom-input" id="UpdatedBy" name="UpdatedBy" required>
     </div>
     <div class="mb-3">
         <label for="UpdatedDate" class="form-label">Updated Date</label>
-        <input type="datetime-local" class="form-control" id="UpdatedDate" name="UpdatedDate" required>
+            <input type="datetime-local" class="form-control custom-input" id="UpdatedDate" name="UpdatedDate" required>
     </div>
     <button type="submit" class="btn btn-primary">Add Branch</button>
 </form>
 </div>
-}
+<style>
+    .styled-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox-label {
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

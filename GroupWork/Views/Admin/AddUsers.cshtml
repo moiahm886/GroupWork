@@ -1,84 +1,142 @@
 ﻿@model GroupWork.Models.UserModel
-@section content {
 <h1 class="text-center mb-5">Add Users</h1>
 <div class="ml-4">
-<form asp-controller="Admin" asp-action="Users" method="post">
-    <div class="form-group">
-        <br />
-        <label>Profile Picture</label>
-        <input class="file-upload-input" type="file" onchange="readURL(this)" accept="Image/*" />
-    </div>
-    <div class="form-group row mb-3">
-        <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
-        <div class="col-sm-5">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
-                <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
-            </div>
+    <form asp-controller="Admin" asp-action="Users" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">Profile Picture:</label>
+            <input class="file-upload-input custom-input" type="file" onchange="readURL(this)" accept="Image/*" />
         </div>
-    </div>
+            <div class="form-group row mb-3">
+                <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
+                <div class="col-sm-5">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
+                        <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
+                    </div>
+                </div>
+            </div>
     <div class="form-group row mb-3">
         <label for="UserName" class="col-sm-2 col-form-label">Username:</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="UserName" name="UserName" required>
+                <input type="text" class="form-control custom-input" id="UserName" name="UserName" required>
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="UserPassword" class="col-sm-2 col-form-label">Password:</label>
         <div class="col-sm-5">
-            <input type="password" class="form-control" id="UserPassword" name="UserPassword" required>
+                <input type="password" class="form-control custom-input" id="UserPassword" name="UserPassword" required>
         </div>
     </div>
     
     <div class="form-group row mb-3">
         <label for="EmpId" class="col-sm-2 col-form-label">Employee ID:</label>
         <div class="col-sm-5">
-            <input type="number" class="form-control" id="EmpId" name="EmpId">
+                <input type="number" class="form-control custom-input" id="EmpId" name="EmpId">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="RoleId" class="col-sm-2 col-form-label">Role ID:</label>
         <div class="col-sm-5">
-            <input type="number" class="form-control" id="RoleId" name="RoleId">
+                <input type="number" class="form-control custom-input" id="RoleId" name="RoleId">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="CompanyId" class="col-sm-2 col-form-label">Company ID:</label>
         <div class="col-sm-5">
-            <input type="number" class="form-control" id="CompanyId" name="CompanyId">
+                <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="BranchId" class="col-sm-2 col-form-label">Branch ID:</label>
         <div class="col-sm-5">
-            <input type="number" class="form-control" id="BranchId" name="BranchId">
+                <input type="number" class="form-control custom-input" id="BranchId" name="BranchId">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="AddedBy" class="col-sm-2 col-form-label">Added By:</label>
         <div class="col-sm-5">
-            <input type="number" class="form-control" id="AddedBy" name="AddedBy">
+                <input type="number" class="form-control custom-input" id="AddedBy" name="AddedBy">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="AddedDate" class="col-sm-2 col-form-label">Added Date:</label>
         <div class="col-sm-5">
-            <input type="date" class="form-control" id="AddedDate" name="AddedDate">
+                <input type="date" class="form-control custom-input" id="AddedDate" name="AddedDate">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="UpdatedBy" class="col-sm-2 col-form-label">Updated By:</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="UpdatedBy" name="UpdatedBy">
+                <input type="text" class="form-control custom-input" id="UpdatedBy" name="UpdatedBy">
         </div>
     </div>
     <div class="form-group row mb-3">
         <label for="UpdatedDate" class="col-sm-2 col-form-label">Updated Date:</label>
         <div class="col-sm-5">
-            <input type="date" class="form-control" id="UpdatedDate" name="UpdatedDate">
+                <input type="date" class="form-control custom-input" id="UpdatedDate" name="UpdatedDate">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Add User</button>
+    <div class="ml-5">
+    <button type="submit" class="btn btn-primary ml-5">Add User</button>
+    </div>
 </form>
 </div>
-}
+<style>
+    input[type="checkbox"] {
+        position: relative;
+        width: 40px; /* Half the width */
+        height: 20px; /* Half the height */
+        -webkit-appearance: none;
+        appearance: none;
+        background: orange;
+        outline: none;
+        border-radius: 0.85rem; /* Half the border-radius */
+        cursor: pointer;
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+    }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 20px; /* Half the width */
+            height: 20px; /* Half the height */
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: translateX(100%);
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #00ed64;
+        }
+
+    /* Additional style for the checkbox */
+    .sliding-checkbox {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+</style>
