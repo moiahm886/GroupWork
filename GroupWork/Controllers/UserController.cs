@@ -34,12 +34,12 @@ namespace GroupWork.Controllers
                 var User = await managementDataContextClass.tbUsers.FirstOrDefaultAsync(r => r.UserName == userModel.UserName);
                 if (User == null)
                 {
-                    ViewData["LoginResult"] = "User Does not exist";
+                    ViewData["LoginResult"] = "User Does not exist or incorrect password";
                     return View("LoginView");
                 }
                 else if(userModel.UserPassword!=User.UserPassword)
                 {
-                    ViewData["LoginResult"] = "Incorrect Password";
+                    ViewData["LoginResult"] = "User Does not exist or incorrect password";
                     return View("LoginView");
                 }
                 else if(userModel.IsActive==0)

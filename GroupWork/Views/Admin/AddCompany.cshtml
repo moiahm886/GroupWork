@@ -8,43 +8,63 @@
 <form asp-controller="Admin" asp-action="CompanyAddition" method="post">
     <div class="mb-3">
         <label for="Name" class="form-label">Name:</label>
+            <div class="col-sm-5">
             <input type="text" class="form-control custom-input" id="Name" name="Name" required>
+            </div>
     </div>
     <div class="mb-3">
         <label for="Address" class="form-label">Address:</label>
+            <div class="col-sm-5">
             <input type="text" class="form-control custom-input" id="Address" name="Address" required>
+            </div>
     </div>
     <div class="mb-3">
         <label for="Email" class="form-label">Email:</label>
+            <div class="col-sm-5">
             <input type="email" class="form-control custom-input" id="Email" name="Email" required>
+            </div>
     </div>
     <div class="mb-3">
         <label for="ContactNo" class="form-label">Contact No:</label>
+            <div class="col-sm-5">
             <input type="tel" class="form-control custom-input" id="ContactNo" name="ContactNo">
+            </div>
     </div>
     <div class="mb-3">
         <label for="FaxNo" class="form-label">Fax No:</label>
+            <div class="col-sm-5">
             <input type="tel" class="form-control custom-input" id="FaxNo" name="FaxNo">
+            </div>
     </div>
     <div class="mb-3">
         <label for="Logo" class="form-label">Logo:</label>
+            <div class="col-sm-5">
             <input type="text" class="form-control custom-input" id="Logo" name="Logo">
+            </div>
     </div>
     <div class="mb-3">
         <label for="CountryId" class="form-label">Country ID:</label>
+            <div class="col-sm-5">
             <input type="number" class="form-control custom-input" id="CountryId" name="CountryId">
+            </div>
     </div>
     <div class="mb-3">
         <label for="CityId" class="form-label">City ID:</label>
+            <div class="col-sm-5">
             <input type="number" class="form-control custom-input" id="CityId" name="CityId">
+            </div>
     </div>
     <div class="mb-3">
         <label for="BankName" class="form-label">Bank Name:</label>
+            <div class="col-sm-5">
             <input type="text" class="form-control custom-input" id="BankName" name="BankName">
+            </div>
     </div>
     <div class="mb-3">
         <label for="BankIban" class="form-label">Bank Iban:</label>
+            <div class="col-sm-5">
             <input type="text" class="form-control custom-input" id="BankIban" name="BankIban">
+            </div>
     </div>
             <div class="form-group row mb-3">
                 <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
@@ -58,37 +78,32 @@
 
     <div class="mb-3">
         <label for="AddedBy" class="form-label">Added By:</label>
+            <div class="col-sm-5">
             <input type="number" class="form-control custom-input" id="AddedBy" name="AddedBy">
+            </div>
     </div>
     <div class="mb-3">
         <label for="AddedDate" class="form-label">Added Date:</label>
+            <div class="col-sm-5">
             <input type="datetime-local" class="form-control custom-input" id="AddedDate" name="AddedDate">
+            </div>
     </div>
     <div class="mb-3">
         <label for="UpdatedBy" class="form-label">Updated By:</label>
+            <div class="col-sm-5">
             <input type="number" class="form-control custom-input" id="UpdatedBy" name="UpdatedBy">
+            </div>
     </div>
     <div class="mb-3">
         <label for="UpdatedDate" class="form-label">Updated Date:</label>
+            <div class="col-sm-5">
             <input type="datetime-local" class="form-control custom-input" id="UpdatedDate" name="UpdatedDate">
+            </div>
     </div>
     <button type="submit" class="btn btn-primary">Add Company</button>
 </form>
 </div>
 <style>
-    .styled-form {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .checkbox-label {
-        font-weight: bold;
-        margin-left: 10px;
-    }
     input[type="checkbox"] {
         position: relative;
         width: 40px; /* Half the width */
@@ -136,7 +151,7 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 255, 0.2);
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 

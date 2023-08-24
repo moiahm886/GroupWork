@@ -2,9 +2,11 @@
 <h1 class="text-center mb-5">Add Users</h1>
 <div class="ml-4">
     <form asp-controller="Admin" asp-action="Users" method="post">
-        <div class="form-group">
+        <div class="form-group row mb-3">
             <label class="col-sm-2 col-form-label">Profile Picture:</label>
+            <div class="col-sm-5">
             <input class="file-upload-input custom-input" type="file" onchange="readURL(this)" accept="Image/*" />
+            </div>
         </div>
             <div class="form-group row mb-3">
                 <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
@@ -61,7 +63,7 @@
     <div class="form-group row mb-3">
         <label for="AddedDate" class="col-sm-2 col-form-label">Added Date:</label>
         <div class="col-sm-5">
-                <input type="date" class="form-control custom-input" id="AddedDate" name="AddedDate">
+                <input type="datetime-local" class="form-control custom-input" id="AddedDate" name="AddedDate">
         </div>
     </div>
     <div class="form-group row mb-3">
@@ -73,7 +75,7 @@
     <div class="form-group row mb-3">
         <label for="UpdatedDate" class="col-sm-2 col-form-label">Updated Date:</label>
         <div class="col-sm-5">
-                <input type="date" class="form-control custom-input" id="UpdatedDate" name="UpdatedDate">
+                <input type="datetime-local" class="form-control custom-input" id="UpdatedDate" name="UpdatedDate">
         </div>
     </div>
     <div class="ml-5">
@@ -84,21 +86,20 @@
 <style>
     input[type="checkbox"] {
         position: relative;
-        width: 40px; /* Half the width */
-        height: 20px; /* Half the height */
+        width: 40px; 
+        height: 20px; 
         -webkit-appearance: none;
         appearance: none;
         background: orange;
         outline: none;
-        border-radius: 0.85rem; /* Half the border-radius */
+        border-radius: 0.85rem; 
         cursor: pointer;
         box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
     }
-
         input[type="checkbox"]::before {
             content: "";
-            width: 20px; /* Half the width */
-            height: 20px; /* Half the height */
+            width: 20px; 
+            height: 20px; 
             border-radius: 50%;
             background: #fff;
             position: absolute;
@@ -115,8 +116,6 @@
         input[type="checkbox"]:checked {
             background: #00ed64;
         }
-
-    /* Additional style for the checkbox */
     .sliding-checkbox {
         position: absolute;
         opacity: 0;
@@ -132,11 +131,9 @@
         box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
-
         .custom-input:focus {
             border-color: #80bdff;
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
-
 </style>

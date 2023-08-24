@@ -1,24 +1,24 @@
 ﻿@model GroupWork.Models.UserModel
-    <div class="container mt-5">
-        <h1 class="text-center mb-6">View User Details</h1>
-        <div class="ml-4">
-        <form>
-        <div class="mb-3">
-            <label for="UserName" class="form-label">ID</label>
-            <input type="text" class="form-control" name="Id" id="UserName" value="@Model.Id" readonly />
-        </div>
+<div class="container mt-5">
+    <h1 class="text-center mb-3">View User Details</h1>
+    <div class="ml-4">
+        <form id="deleteForm" method="post" asp-controller="Admin" asp-action="DeleteUser">
+            <div class="mb-3">
+                <label for="UserName" class="form-label">ID</label>
+                <input type="text" class="form-control" name="Id" id="UserName" value="@Model.Id" readonly />
+            </div>
             <div class="mb-3">
                 <label for="UserName" class="form-label">User Name</label>
                 <input type="text" class="form-control" name="UserName" id="UserName" value="@Model.UserName" readonly />
             </div>
             <div class="mb-3">
                 <label for="UserPassword" class="form-label">User Password</label>
-                <input type="text" class="form-control" name="UserPassword" id="UserPassword" value="@Model.UserPassword"/>
+                <input type="text" class="form-control" name="UserPassword" id="UserPassword" value="@Model.UserPassword" />
             </div>
-        <div class="mb-3">
-            <label for="IsActive" class="form-label">Is Active</label>
-            <input type="text" class="form-control" name="IsActive" id="IsActive" value="@((Model.IsActive == 1) ? "Active" : "Inactive")" />
-        </div>
+            <div class="mb-3">
+                <label for="IsActive" class="form-label">Is Active</label>
+                <input type="text" class="form-control" name="IsActive" id="IsActive" value="@((Model.IsActive == 1) ? "Active" : "Inactive")" />
+            </div>
             <div class="mb-3">
                 <label for="EmpId" class="form-label">Employee Id</label>
                 <input type="number" class="form-control" name="EmpId" id="EmpId" value="@Model.EmpId" readonly />
@@ -37,11 +37,11 @@
             </div>
             <div class="mb-3">
                 <label for="AddedBy" class="form-label">Added by</label>
-                <input type="number" class="form-control" name="AddedBy" id="AddedBy" value="@Model.AddedBy" readonly/>
+                <input type="number" class="form-control" name="AddedBy" id="AddedBy" value="@Model.AddedBy" readonly />
             </div>
             <div class="mb-3">
-            <label for="AddedDate" class="form-label">Added Date</label>
-            <input type="datetime" class="form-control" name="AddedDate" id="AddedDate" value="@((Model.AddedDate != DateTime.MinValue) ? Model.AddedDate.ToString("yyyy-MM-dd HH:mm:ss") : "N/A")" readonly />
+                <label for="AddedDate" class="form-label">Added Date</label>
+                <input type="datetime" class="form-control" name="AddedDate" id="AddedDate" value="@((Model.AddedDate != DateTime.MinValue) ? Model.AddedDate.ToString("yyyy-MM-dd HH:mm:ss") : "N/A")" readonly />
             </div>
 
 
@@ -55,10 +55,16 @@
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-secondary" asp-controller="Admin" asp-action="UpdateUser">Update</button>
-            <button type="submit" class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUser">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
             </div>
             <a href="@Url.Action("ManageUsers", "Admin")" class="btn btn-secondary mt-4">Back to User List</a>
         </form>
-        </div>
     </div>
-    
+</div>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this user?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>

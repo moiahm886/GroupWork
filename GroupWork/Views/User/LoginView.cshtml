@@ -7,13 +7,14 @@
     <div class="mb-3 row">
         <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="abcd123" required>
+                <input type="text" class="form-control custom-input" id="UserName" name="UserName" placeholder="Enter you username" required>
         </div>
     </div>
     <div class="mb-3 row">
         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-5">
-            <input type="password" class="form-control" id="inputPassword" name="UserPassword" required>
+                <input type="password" class="form-control custom-input" id="inputPassword" name="UserPassword" placeholder="Enter your password" required>
+
         </div>
     </div>
         <div class="col-md-1">
@@ -25,3 +26,19 @@
     }
 </form>
 </div>
+<style>
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

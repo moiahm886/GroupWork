@@ -19,6 +19,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .navbar {
+            width: 90%;
+            margin: 0 auto;
+        }
+    </style>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,21 +54,25 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- CSS Files -->
     <link id="pagestyle" href="~/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-    <nav class="navbar main-header navbar blur blur-rounded z-index-3 shadow navbar-expand navbar-white my-3 py-2 navbar-light">
+    <nav class="navbar main-header navbar blur blur-rounded z-index-3 shadow navbar-expand navbar-light bg-info my-3 py-2">
         <!-- Left navbar links -->
 
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GroupWork</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            @if (loginResult != "GuestUser" && loginResult != "Admin" && loginResult != "Company" && loginResult != "Branch")
+            {
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GroupWork</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            }
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     @if (string.IsNullOrEmpty(loginResult))
@@ -73,7 +83,7 @@
                     }
                     @if (loginResult == "GuestUser")
                     {
-                        <li class="nav-item navbar-dark">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="UserDashboard" asp-route-username="@user">Home</a>
                         </li>
                         @await Html.PartialAsync("_NavigationView")
@@ -309,5 +319,13 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    @if (TempData.ContainsKey("AlertScript"))
+    {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            @Html.Raw(TempData["AlertScript"])
+            });
+        </script>
+    }
     </body>
 </html>

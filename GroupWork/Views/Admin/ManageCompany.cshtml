@@ -4,7 +4,7 @@
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
-        max-width: 600px; /* Adjust the maximum width as needed */
+        max-width: 600px;
         margin: 0 auto;
         background-color: #fff;
         border-radius: 10px;
@@ -14,7 +14,7 @@
 
     th, td {
         padding: 12px 15px;
-        text-align: left;
+        text-align: center;
     }
 
     thead {
@@ -35,7 +35,7 @@
 
 </style>
 <h1 class="text-center">Manage Company</h1>
-<form style="overflow:auto" asp-controller="Admin" asp-action="DeleteCompany">
+<form id="deleteForm" style="overflow:auto" asp-controller="Admin" asp-action="DeleteCompany">
     <table class="table" style="border: 1px solid #F5F5DC; border-collapse: collapse; width: 100%; border-spacing: 0;">
         <thead>
             <tr style="border-bottom: 1px solid #F5F5DC;">
@@ -79,13 +79,17 @@
                     <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                     <td style="border: 1px solid #F5F5DC;">
                             <input type="hidden" name="Id" value="@comp.Id" />
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
-
-
 </form>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this company?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>

@@ -34,6 +34,7 @@ namespace GroupWork.Controllers
             };
             await managementDataContextClass.tbUsers.AddAsync(user);
             await managementDataContextClass.SaveChangesAsync();
+            TempData["AlertScript"] = "Swal.fire('Success!', 'User Added Successfully', 'success');";
             ViewData["Authorized"] = "Admin";
             return View("AddUsers");
         }
@@ -50,6 +51,7 @@ namespace GroupWork.Controllers
                 existingPermission.CanInsert = permissionModel.CanInsert == 1 ? 1 : 0;
                 managementDataContextClass.tbPermissions.Update(existingPermission);
                 await managementDataContextClass.SaveChangesAsync();
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Permission Updated Successfully', 'success');";
             }
             return RedirectToAction("ManagePermission");
         }
@@ -75,6 +77,7 @@ namespace GroupWork.Controllers
             };
             await managementDataContextClass.tbRoles.AddAsync(role);
             await managementDataContextClass.SaveChangesAsync();
+            TempData["AlertScript"] = "Swal.fire('Success!', 'Role Added Successfully', 'success');";
             ViewData["Authorized"] = "Admin";
             return View("AddRoles");
         }
@@ -104,18 +107,21 @@ namespace GroupWork.Controllers
                 managementDataContextClass.tbUsers.Update(user);
                 await managementDataContextClass.SaveChangesAsync();
             }
+            TempData["AlertScript"] = "Swal.fire('Success!', 'User Updated Successfully', 'success');";
             return RedirectToAction("ManageUsers");
         }
         public async Task<IActionResult> DeleteUser(UserModel usermodel)
         {
             var user = await managementDataContextClass.tbUsers.FirstOrDefaultAsync(x => x.Id == usermodel.Id);
-            if(user!= null)
+            if (user != null)
             {
                 managementDataContextClass.tbUsers.Remove(user);
                 await managementDataContextClass.SaveChangesAsync();
+                TempData["AlertScript"] = "Swal.fire('Success!', 'User Deleted Successfully', 'success');";
             }
             return RedirectToAction("ManageUsers");
         }
+
         [HttpGet]
         public async Task<IActionResult> ViewUser(int id)
         {
@@ -175,6 +181,7 @@ namespace GroupWork.Controllers
             };
             await managementDataContextClass.Company.AddAsync(Company);
             await managementDataContextClass.SaveChangesAsync();
+            TempData["AlertScript"] = "Swal.fire('Success!', 'Company Added Successfully', 'success');";
             return RedirectToAction("ManageCompany");
         }
         public async Task<IActionResult> DeleteCompany(int ID)
@@ -190,6 +197,7 @@ namespace GroupWork.Controllers
                     managementDataContextClass.CompanyBranch.RemoveRange(branches);
                 }
                 await managementDataContextClass.SaveChangesAsync();
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Company Deleted Successfully', 'success');";
             }
             return RedirectToAction("ManageCompany");
         }
@@ -255,7 +263,7 @@ namespace GroupWork.Controllers
                 };
                 await managementDataContextClass.CompanyBranch.AddAsync(Branchinfo);
                 await managementDataContextClass.SaveChangesAsync();
-                TempData["Message"] = "Done";
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Branch Added Successfully', 'success');";
                 return RedirectToAction("ManageBranch");
             }
             else
@@ -270,6 +278,7 @@ namespace GroupWork.Controllers
             {
                 managementDataContextClass.CompanyBranch.Remove(branch);
                 await managementDataContextClass.SaveChangesAsync();
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Branch Deleted Successfully', 'success');";
             }
             return RedirectToAction("ManageBranch");
         }
@@ -296,6 +305,7 @@ namespace GroupWork.Controllers
             {
                 await managementDataContextClass.tbPermissions.AddAsync(permission);
                 await managementDataContextClass.SaveChangesAsync();
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Permission Added Successfully', 'success');";
             }
             else
             {
