@@ -1,0 +1,95 @@
+﻿@model  List<GroupWork.Models.EmployeeModel>
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    thead {
+        background-color: #f0f0f0;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+
+    tr:hover {
+        background-color: #e0e0e0;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+</style>
+<h1 class="text-center mb-5">Added Employee</h1>
+<div class="table-container mt-4">
+    <div class="scrollable-table">
+        <form asp-controller="Employee" asp-action="DeleteEmployee">
+            <table>
+                <thead>
+                    <tr>
+                        <th>EmpCode</th>
+                        <th>EmpDepartmentID</th>
+                        <th>EmpSectionID</th>
+                        <th>EmpFirstNameEn</th>
+                        <th>EmpLastNameEn</th>
+                        <th>EmpEmail</th>
+                        <th>EmpMobileNo</th>
+                        <th>EmpDOB</th>
+                        <th>EmpGenderID</th>
+                        <th>CompanyID</th>
+                        <th>BranchID</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+                        <tr>
+                            <td name="EmpCode" value="@employee.EmpCode">@employee.EmpCode</td>
+                            <td name="EmpDepartmentId" value="@employee.EmpDepartmetId">@employee.EmpDepartmetId</td>
+                            <td name="EmpSectionId" value="@employee.EmpSectionId">@employee.EmpSectionId</td>
+                            <td name="EmpFirstNameEn" value="@employee.EmpFirstNameEn">@employee.EmpFirstNameEn</td>
+                            <td name="EmpLastNameEn" value="@employee.EmpLastNameEn">@employee.EmpLastNameEn</td>
+                            <td name="EmpEmail" value="@employee.EmpEmail">@employee.EmpEmail</td>
+                            <td name="EmpMobileNo" value="@employee.EmpMobileNo">@employee.EmpMobileNo</td>
+                            <td name="EmpDOB" value="@employee.EmpDOB">@(employee.EmpDOB.HasValue ? employee.EmpDOB.Value.ToString("dd-MMM-yyyy") : "N/A")</td>
+                            <td name="EmpGenderId" value="@employee.EmpGenderId">@employee.EmpGenderId</td>
+                            <td name="CompanyId" value="@employee.CompanyId">@employee.CompanyId</td>
+                            <td name="BranchId" value="@employee.BranchId">@employee.BranchId</td>
+                            <td>
+                                <button type="submit" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+                                <input type="hidden" name="Id" value="@employee.Id"> 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this Employee?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>

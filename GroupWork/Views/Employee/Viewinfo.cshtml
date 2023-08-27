@@ -1,0 +1,91 @@
+﻿@model GroupWork.Models.EmployeeModel
+@{
+    var Update = ViewData["Update"] as string;
+}
+<title>Employee Information</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .user-info-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info-label {
+        font-weight: bolder;
+    }
+
+    .user-info-item {
+        margin-bottom: 10px;
+    }
+
+    .active {
+        color: green;
+    }
+
+    .inactive {
+        color: red;
+    }
+</style>
+<body>
+    <div class="user-info-container mt-4">
+        <h1 class="text-center mb-4">Employee Information</h1>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Employee ID:</span> @Model.Id
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Employee Code:</span> @Model.EmpCode
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Gender ID:</span> @(Model.EmpGenderId.HasValue ? Model.EmpGenderId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Section ID:</span> @(Model.EmpSectionId.HasValue ? Model.EmpSectionId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Company ID:</span> @(Model.CompanyId.HasValue ? Model.CompanyId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Branch ID:</span> @(Model.BranchId.HasValue ? Model.BranchId.Value.ToString() : "N/A")
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Active Status:</span>
+            <span class="active-status @(Model.IsActive == 1 ? "active" : "inactive")">
+                @(Model.IsActive == 1 ? "Active" : "Inactive")
+            </span>
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Department ID:</span> @(Model.EmpDepartmetId.HasValue ? Model.EmpDepartmetId.Value.ToString() : "N/A")
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">First Name:</span> @Model.EmpFirstNameEn
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Last Name:</span> @Model.EmpLastNameEn
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Email:</span> @Model.EmpEmail
+        </div>
+        <div class="user-info-item">
+            <span class="user-info-label">Mobile No:</span> @Model.EmpMobileNo
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Birthday:</span> @(Model.EmpDOB.HasValue ? Model.EmpDOB.Value.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+        </div>
+        <form asp-controller="Employee" asp-action="UpdatePage">
+        @if (Update == "Allow")
+        {
+            <div class="mt-4 d-flex justify-content-center">
+                <button class="btn btn-dark" >Want To Update?</button>
+            </div>
+            }
+        </form>
+</body>

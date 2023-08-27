@@ -1,0 +1,15 @@
+﻿
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-controller="Employee" asp-action="Viewinfo">View Info</a>
+</li>
+<li class="nav-item">
+    <form asp-controller="User" asp-action="Logout" method="post" id="logoutForm">
+        <a href="@Url.Action("Logout", "Admin")" class="nav-link text-dark" onclick="return confirmLogout();">Logout</a>
+    </form>
+</li>
+
+<script>
+    function confirmLogout() {
+        return confirm("Are you sure you want to log out?");
+    }
+</script>

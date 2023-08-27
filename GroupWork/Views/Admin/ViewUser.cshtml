@@ -40,24 +40,6 @@
                 <label for="BranchId" class="form-label">Branch Id</label>
                 <input type="number" class="form-control" name="BranchID" id="BranchId" value="@Model.BranchId" />
             </div>
-            <div class="mb-3">
-                <label for="AddedBy" class="form-label">Added by</label>
-                <input type="number" class="form-control" name="AddedBy" id="AddedBy" value="@Model.AddedBy" readonly />
-            </div>
-            <div class="mb-3">
-                <label for="AddedDate" class="form-label">Added Date</label>
-                <input type="datetime" class="form-control" name="AddedDate" id="AddedDate" value="@((Model.AddedDate != DateTime.MinValue) ? Model.AddedDate.ToString("yyyy-MM-dd HH:mm:ss") : "N/A")" readonly />
-            </div>
-
-
-            <div class="mb-3">
-                <label for="UpdatedBy" class="form-label">Updated By</label>
-                <input type="number" class="form-control" name="UpdatedBy" id="UpdatedBy" value="@Model.UpdatedBy" />
-            </div>
-            <div class="mb-3">
-                <label for="UpdatedDate" class="form-label">Updated Date</label>
-                <input type="datetime" class="form-control" name="UpdatedDate" id="UpdatedDate" value="@((Model.UpdatedDate != null) ? Model.UpdatedDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A")" readonly />
-            </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-secondary" asp-controller="Admin" asp-action="UpdateUser">Update</button>
                 <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>

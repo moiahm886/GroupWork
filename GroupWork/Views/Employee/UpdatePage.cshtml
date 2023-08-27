@@ -1,0 +1,122 @@
+﻿@model GroupWork.Models.EmployeeModel
+@{
+    var Update = ViewData["Update"] as string;
+    var Delete = ViewData["Delete"] as string;
+}
+<div class="container mt-5">
+    <h1 class="text-center mb-3">Your Details</h1>
+    <div class="ml-4">
+        <form id="deleteForm" method="post" asp-controller="Employee" asp-action="DeleteEmployee">
+            <div class="mb-3 col-sm-5">
+                <label for="ID" class="form-label">ID</label>
+                <input type="text" class="form-control custom-input" name="Id" id="ID" value="@Model.Id" readonly />
+            </div>
+            <div class="mb-3 col-sm-5">
+                <label for="EmpCode" class="form-label">Employee Code</label>
+                <input type="text" class="form-control custom-input" name="EmpCode" id="EmpCode" value="@Model.EmpCode" readonly />
+            </div>
+            <div class="mb-3 col-sm-5">
+                <label for="EmpSectionId" class="form-label">First Name</label>
+                <input type="text" class="form-control custom-input" name="EmpFirstNameEn" id="EmpFirstNameEn" value="@Model.EmpFirstNameEn" />
+            </div>
+            <div class="mb-3 col-sm-5">
+                <label for="EmpSectionId" class="form-label">Last Name</label>
+                <input type="text" class="form-control custom-input" name="EmpLastNameEn" id="EmpFirstNameEn" value="@Model.EmpLastNameEn" />
+            </div>
+            <div class="mb-3 col-sm-5">
+                <label for="EmpSectionId" class="form-label">Email</label>
+                <input type="email" class="form-control custom-input" name="EmpEmail" id="EmpEmail" value="@Model.EmpEmail" />
+            </div>
+            <div class="mb-3 col-sm-5">
+                <label for="EmpSectionId" class="form-label">Mobile Number</label>
+                <input type="text" class="form-control custom-input" name="EmpMobileNo" id="EmpMobileNo" value="@Model.EmpMobileNo" />
+            </div> 
+            <div class="mb-3 col-sm-5">
+                <label for="EmpSectionId" class="form-label">Birthday</label>
+                <input type="date" class="form-control custom-input" name="EmpDOB" id="EmpDOB" value='@(Model.EmpDOB.HasValue ? Model.EmpDOB.Value.ToString("yyyy-MM-dd") : "")' />
+            </div>
+            <div class="mt-4 ml-5">
+                @if (Update != "Allow")
+                {
+                    <button type="submit" class="btn btn-secondary" asp-controller="Employee" asp-action="UpdateEmployee" disabled>Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-secondary" asp-controller="Employee" asp-action="UpdateEmployee">Update</button>
+                }
+                @if (Delete != "Allow")
+                {
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()" disabled>Delete</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this Employee?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>
+<style>
+    input[type="checkbox"] {
+        position: relative;
+        width: 40px;
+        height: 20px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: orange;
+        outline: none;
+        border-radius: 0.85rem;
+        cursor: pointer;
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+    }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s;
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: translateX(100%);
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #00ed64;
+        }
+
+    .sliding-checkbox {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

@@ -15,6 +15,7 @@
 ﻿@{
     var loginResult = ViewData["Authorized"] as string;
     var user = ViewData["Username"] as string;
+    var EmpCode = ViewData["EmpCode"] as string;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +66,7 @@
         <!-- Left navbar links -->
 
         <div class="container-fluid">
-            @if (loginResult != "GuestUser" && loginResult != "Admin" && loginResult != "Company" && loginResult != "Branch")
+            @if (loginResult != "GuestUser" && loginResult != "Admin" && loginResult != "Company" && loginResult != "Branch" && loginResult !="Employee")
             {
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GroupWork</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -91,23 +92,16 @@
                     @if (loginResult == "Admin")
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard" asp-route-username="@user">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard">Home</a>
                         </li>
                         @await Html.PartialAsync("AdminNavBar")
                     }
-                    @if (loginResult == "Company")
+                    @if(loginResult == "Employee")
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard" asp-route-username="@user">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="EmployeeDashboard" asp-route-EmpCode="@EmpCode">Home</a>
                         </li>
-                        @await Html.PartialAsync("_companyview")
-                    }
-                    @if (loginResult == "Branch")
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="AdminDashboard" asp-route-username="@user">Home</a>
-                        </li>
-                        @await Html.PartialAsync("_branch")
+                        @await Html.PartialAsync("EmployeeNavBar");
                     }
                 </ul>
             </div>

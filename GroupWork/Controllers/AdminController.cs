@@ -34,10 +34,8 @@ namespace GroupWork.Controllers
                 RoleId = userModel.RoleId,
                 CompanyId = userModel.CompanyId,
                 BranchId = userModel.BranchId,
-                AddedBy = userModel.AddedBy,
-                AddedDate = userModel.AddedDate,
-                UpdatedBy = userModel.UpdatedBy,
-                UpdatedDate = userModel.UpdatedDate,
+                AddedBy = 1,
+                AddedDate = DateTime.Now,
             };
             await managementDataContextClass.tbUsers.AddAsync(user);
             await managementDataContextClass.SaveChangesAsync();
@@ -57,6 +55,8 @@ namespace GroupWork.Controllers
                 existingPermission.CanUpdate = permissionModel.CanUpdate == 1 ? 1 : 0;
                 existingPermission.CanDelete = permissionModel.CanDelete == 1 ? 1 : 0;
                 existingPermission.CanInsert = permissionModel.CanInsert == 1 ? 1 : 0;
+                existingPermission.UpdatedBy = 1;
+                existingPermission.UpdatedDate = DateTime.Now;
                 managementDataContextClass.tbPermissions.Update(existingPermission);
                 await managementDataContextClass.SaveChangesAsync();
                 TempData["AlertScript"] = "Swal.fire('Success!', 'Permission Updated Successfully', 'success');";
@@ -76,12 +76,10 @@ namespace GroupWork.Controllers
                 Name = roleModel.Name,
                 Description = roleModel.Description,
                 IsActive = roleModel.IsActive,
-                CompanyId   =roleModel.CompanyId,
+                CompanyId = roleModel.CompanyId,
                 BranchId = roleModel.BranchId,
-                AddedBy =roleModel.AddedBy,
-                AddedDate  =roleModel.AddedDate,
-                UpdatedById =roleModel.UpdatedById,
-                UpdatedDate =roleModel.UpdatedDate
+                AddedBy = 1,
+                AddedDate  = DateTime.Now,
             };
             await managementDataContextClass.tbRoles.AddAsync(role);
             await managementDataContextClass.SaveChangesAsync();
@@ -110,7 +108,7 @@ namespace GroupWork.Controllers
                 user.RoleId = usermodel.RoleId;
                 user.BranchId = usermodel.BranchId;
                 user.CompanyId = usermodel.CompanyId;
-                user.UpdatedBy = usermodel.UpdatedBy;
+                user.UpdatedBy = 1;
                 user.UpdatedDate = DateTime.Now;
                 managementDataContextClass.tbUsers.Update(user);
                 await managementDataContextClass.SaveChangesAsync();
@@ -162,13 +160,13 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> ManageCompany()
         {
-            ViewData["Authorized"] = "Company";
+            ViewData["Authorized"] = "Admin";
             var company = await managementDataContextClass.Company.ToListAsync();
             return View(company);
         }
         public IActionResult AddCompany()
         {
-            ViewData["Authorized"] = "Company";
+            ViewData["Authorized"] = "Admin";
             return View();
         }
         public async Task<IActionResult> CompanyAddition(CompanyModel companyModel)
@@ -188,8 +186,6 @@ namespace GroupWork.Controllers
                 IsActive = companyModel.IsActive,
                 AddedBy = companyModel.AddedBy,
                 AddedDate = DateTime.Now,
-                UpdatedBy = companyModel.UpdatedBy,
-                UpdatedDate = DateTime.Now
             };
             await managementDataContextClass.Company.AddAsync(Company);
             await managementDataContextClass.SaveChangesAsync();
@@ -246,12 +242,12 @@ namespace GroupWork.Controllers
                 ViewData["Added"] = TempData["Message"];
             }
             var branch = await managementDataContextClass.CompanyBranch.ToListAsync();
-            ViewData["Authorized"] = "Branch";
+            ViewData["Authorized"] = "Admin";
             return View(branch);
         }
         public IActionResult AddBranch()
         {
-            ViewData["Authorized"] = "Branch";
+            ViewData["Authorized"] = "Admin";
             return View();
         }
         public async Task<IActionResult> BranchAddition(BranchModel branchModel)
@@ -267,11 +263,8 @@ namespace GroupWork.Controllers
                     CountryId = branchModel.CountryId,
                     Address = branchModel.Address,
                     Phone = branchModel.Phone,
-                    AddedBy = branchModel.AddedBy,
-                    AddedDate = branchModel.AddedDate,
-                    UpdatedBy = branchModel.UpdatedBy,
-                    UpdatedDate = branchModel.UpdatedDate,
-
+                    AddedBy = 1,
+                    AddedDate = DateTime.Now
                 };
                 await managementDataContextClass.CompanyBranch.AddAsync(Branchinfo);
                 await managementDataContextClass.SaveChangesAsync();
@@ -307,10 +300,8 @@ namespace GroupWork.Controllers
                 CanDelete = permissionModel.CanDelete,
                 BranchId = permissionModel.BranchId,
                 CompanyId = permissionModel.CompanyId,
-                AddedId = permissionModel.AddedId,
-                AddedDate = permissionModel.AddedDate,
-                UpdatedBy = permissionModel.UpdatedBy,
-                UpdatedDate = permissionModel.UpdatedDate,
+                AddedId = 1,
+                AddedDate = DateTime.Now,
             };
             var perm = await managementDataContextClass.tbPermissions.FirstOrDefaultAsync(r => r.RoleId == permissionModel.Id);
             if (perm == null)

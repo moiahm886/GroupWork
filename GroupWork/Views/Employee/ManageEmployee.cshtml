@@ -40,7 +40,12 @@
 
 </style>
 <h1 class="text-center mb-5">Manage Employee</h1>
-<div class="table-container">
+<form asp-controller="Employee" asp-action="AddedEmployee">
+    <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-primary">View Added Employee</button>
+    </div>
+</form>
+<div class="table-container mt-4">
     <div class="scrollable-table">
         <form asp-controller="Employee" asp-action="AddEmployee">
         <table>
@@ -79,6 +84,8 @@
                             <button class="btn btn-primary">Add</button>
                             <input type="hidden" name="EmpCode" value="@user.EmpId">
                             <input type="hidden" name="IsActive" value="@user.IsActive">
+                            <input type="hidden" name="BranchId" value="@user.BranchId">
+                            <input type="hidden" name="CompanyId" value="@user.CompanyId">
                         </td>
                     </tr>
                 }
