@@ -18,6 +18,13 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> Users(UserModel userModel)
         {
+            var isEmpIdUnique = !await managementDataContextClass.tbUsers.AnyAsync(u => u.EmpId == userModel.EmpId);
+
+            if (!isEmpIdUnique)
+            {
+                TempData["AlertScript"] = "Swal.fire('Error!', 'Employee ID is already associated with a user.', 'error');";
+                return RedirectToAction("AddUsers"); 
+            }
             var user = new UserModel
             {
                 UserName = userModel.UserName,
@@ -38,6 +45,7 @@ namespace GroupWork.Controllers
             ViewData["Authorized"] = "Admin";
             return View("AddUsers");
         }
+
         [HttpPost]
         public async Task<IActionResult> UpdatePermission(PermissionModel permissionModel)
         {
@@ -108,6 +116,10 @@ namespace GroupWork.Controllers
                 await managementDataContextClass.SaveChangesAsync();
             }
             TempData["AlertScript"] = "Swal.fire('Success!', 'User Updated Successfully', 'success');";
+            if (user.IsActive==1)
+            {
+                return RedirectToAction("ManageEmployee", "Employee", new { id = usermodel.EmpId});
+            }
             return RedirectToAction("ManageUsers");
         }
         public async Task<IActionResult> DeleteUser(UserModel usermodel)

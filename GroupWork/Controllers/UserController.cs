@@ -24,6 +24,7 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> ManageLogin(UserModel userModel)
         {
+            var user = managementDataContextClass.tbUsers.FirstOrDefault(u => u.UserName == userModel.UserName);
             if (userModel.UserName == "Admin" && userModel.UserPassword == "Admin")
             {
                 ViewData["Authorized"] = "Admin";
@@ -42,15 +43,29 @@ namespace GroupWork.Controllers
                     ViewData["LoginResult"] = "User Does not exist or incorrect password";
                     return View("LoginView");
                 }
-                else if(userModel.IsActive==0)
+                else if(user.IsActive==0)
                 {
                     ViewData["Username"] = userModel.UserName;
                     return RedirectToAction("UserDashboard", new { username = userModel.UserName });
                 }
-                else if(userModel.IsActive == 1)
+                else if(user.IsActive == 1)
                 {
-                    ViewData["Authorized"] = "Employee";
-                    return View("EmployeeDashboard");
+                    if (user != null)
+                    {
+                        var EmpId = user.EmpId;
+                        var employeeExists = await managementDataContextClass.tbEmployees
+                        .AnyAsync(employee => employee.EmpCode == user.EmpId.ToString());
+                        if (employeeExists)
+                        {
+                            ViewData["Authorized"] = "Employee";
+                            return RedirectToAction("EmployeeDashboard","Employee",new {EmpCode = user.EmpId});
+                        }
+                        else
+                        {
+                            ViewData["Username"] = userModel.UserName;
+                            return RedirectToAction("UserDashboard", new { username = userModel.UserName });
+                        }
+                    }
                 }
                 return View("LoginView");
             }

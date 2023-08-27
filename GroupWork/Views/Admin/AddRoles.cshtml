@@ -2,15 +2,15 @@
 <h1 class="text-center mb-5">Add Role</h1>
 <div class="ml-4">
 <form asp-controller="Admin" asp-action="Roles" method="post">
-     <div class="form-group row mb-3">
-        <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
-        <div class="col-sm-5">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
-                <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
+        <div class="form-group row mb-3">
+            <label for="IsActive" class="col-sm-2 col-form-label">Is Active:</label>
+            <div class="col-sm-5">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" value="1">
+                    <label class="form-check-label" for="IsActive">Toggle to activate/deactivate</label>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="form-group row mb-3">
         <label for="Name" class="col-sm-2 col-form-label">Name:</label>
@@ -67,21 +67,21 @@
 <style>
     input[type="checkbox"] {
         position: relative;
-        width: 40px; /* Half the width */
-        height: 20px; /* Half the height */
+        width: 40px; 
+        height: 20px; 
         -webkit-appearance: none;
         appearance: none;
         background: orange;
         outline: none;
-        border-radius: 0.85rem; /* Half the border-radius */
+        border-radius: 0.85rem; 
         cursor: pointer;
         box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
     }
 
         input[type="checkbox"]::before {
             content: "";
-            width: 20px; /* Half the width */
-            height: 20px; /* Half the height */
+            width: 20px;
+            height: 20px; 
             border-radius: 50%;
             background: #fff;
             position: absolute;
@@ -98,8 +98,6 @@
         input[type="checkbox"]:checked {
             background: #00ed64;
         }
-
-    /* Additional style for the checkbox */
     .sliding-checkbox {
         position: absolute;
         opacity: 0;

@@ -1,0 +1,89 @@
+﻿@model (List<GroupWork.Models.UserModel>User,GroupWork.Models.EmployeeModel)
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    thead {
+        background-color: #f0f0f0;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+
+    tr:hover {
+        background-color: #e0e0e0;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+</style>
+<h1 class="text-center mb-5">Manage Employee</h1>
+<div class="table-container">
+    <div class="scrollable-table">
+        <form asp-controller="Employee" asp-action="AddEmployee">
+        <table>
+            <thead>
+                <tr>
+                    <th>EmpCode</th>
+                    <th>EmpDepartmentID</th>
+                    <th>EmpSectionID</th>
+                    <th>EmpFirstNameEn</th>
+                    <th>EmpLastNameEn</th>
+                    <th>EmpEmail</th>
+                    <th>EmpMobileNo</th>
+                    <th>EmpDOB</th>
+                    <th>EmpGenderID</th>
+                    <th>CompanyID</th>
+                    <th>BranchID</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.User)
+                {
+                    <tr>
+                        <td name="EmpCode" value="@Model.Item2.EmpCode">@user.EmpId</td>
+                        <td><input type="number" style="width: 60px;" name="EmpDepartmetId" value="@Model.Item2.EmpDepartmetId"></td>
+                        <td><input type="number" style="width: 60px;" name="EmpSectionId" value="@Model.Item2.EmpSectionId"></td>
+                        <td><input type="text" style="width: 100px;" name="EmpFirstNameEn" value="@Model.Item2.EmpFirstNameEn"></td>
+                        <td><input type="text" style="width: 100px;" name="EmpLastNameEn" value="@Model.Item2.EmpLastNameEn"></td>
+                        <td><input type="email" style="width: 150px;" name="EmpEmail" value="@Model.Item2.EmpEmail"></td>
+                        <td><input type="text" style="width: 100px;" name="EmpMobileNo" value="@Model.Item2.EmpMobileNo"></td>
+                        <td><input type="date" name="EmpDOB" value="@Model.Item2.EmpDOB"></td>
+                        <td><input type="number" style="width: 60px;" name="EmpGenderId" value="@Model.Item2.EmpGenderId"></td>
+                        <td name="CompanyId" value="@Model.Item2.CompanyId">@user.CompanyId</td>
+                        <td name="BranchId" value="@Model.Item2.BranchId">@user.CompanyId</td>
+                        <td>
+                            <button class="btn btn-primary">Add</button>
+                            <input type="hidden" name="EmpCode" value="@user.EmpId">
+                            <input type="hidden" name="IsActive" value="@user.IsActive">
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </form>
+    </div>
+</div>
