@@ -79,9 +79,9 @@
                     <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.BankIban</td>
                     <td style="border: 1px solid #F5F5DC; padding: 8px;">@(comp.IsActive == 1 ? "Active" : "Inactive")</td>
                     <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.AddedBy</td>
-                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.AddedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@(comp.AddedDate != default(DateTime) ? comp.AddedDate.ToString("dd-MMM-yyyy") : "N/A")</td>
                     <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.UpdatedBy</td>
-                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@comp.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td style="border: 1px solid #F5F5DC; padding: 8px;">@(comp.UpdatedDate != default(DateTime) ? comp.UpdatedDate.ToString("dd-MMM-yyyy") : "N/A")</td>
                     <td style="border: 1px solid #F5F5DC;">
                             <input type="hidden" name="Id" value="@comp.Id" />
                         <button type="submit" class="btn btn-danger" onclick="confirmDelete()">Delete</button>

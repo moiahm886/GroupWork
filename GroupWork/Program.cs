@@ -1,3 +1,4 @@
+using GroupWork.DAL;
 using GroupWork.Data;
 using GroupWork.Models;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +11,10 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+builder.Services.AddScoped<UserInterface, UserRepository>();
+builder.Services.AddScoped<EmployeeInterface, EmployeeRepo>();
+builder.Services.AddScoped<PermissionInterface, PermissionRepo>();
+builder.Services.AddScoped<CompanyInterface, CompanyRepo>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

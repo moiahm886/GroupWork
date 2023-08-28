@@ -1,4 +1,5 @@
-﻿using GroupWork.Data;
+﻿using GroupWork.DAL;
+using GroupWork.Data;
 using GroupWork.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,16 +10,19 @@ namespace GroupWork.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly ManagementDataContextClass managementDataContextClass;
-        public EmployeeController(ManagementDataContextClass managementDataContextClass)
+        private readonly EmployeeInterface employeeInterface;
+        private readonly PermissionInterface permissionInterface;
+
+        public EmployeeController(EmployeeInterface employeeInterface, PermissionInterface permissionInterface)
         {
-            this.managementDataContextClass = managementDataContextClass;
+            this.employeeInterface = employeeInterface;
+            this.permissionInterface = permissionInterface;
         }
         public IActionResult CheckPermission()
         {
-            var role = managementDataContextClass.tbRoles.FirstOrDefault(e => e.Name == "Employee");
+            var role = permissionInterface.role();
             if (role != null) {
-                var permission = managementDataContextClass.tbPermissions.FirstOrDefault(u => u.RoleId == role.Id);
+                var permission = permissionInterface.permission(role.Id);
                 if (permission != null)
                 {
                     if (permission.CanRead == 1)
@@ -40,15 +44,12 @@ namespace GroupWork.Controllers
         public async Task<IActionResult> ManageEmployee()
         {
             ViewData["Authorized"] = "Admin";
-            var activeUsers = await managementDataContextClass.tbUsers
-            .Where(user => user.IsActive == 1)
-            .ToListAsync();
+            var activeUsers = await employeeInterface.ActiveUser();
             var usersWithoutEmployee = new List<UserModel>();
 
             foreach (var user in activeUsers)
             {
-                var employeeExists = await managementDataContextClass.tbEmployees
-                    .AnyAsync(employee => employee.EmpCode == user.EmpId.ToString());
+                var employeeExists = await employeeInterface.existingEmployee(user.EmpId);
                 if (!employeeExists)
                 {
                     usersWithoutEmployee.Add(user);
@@ -60,14 +61,14 @@ namespace GroupWork.Controllers
         public async Task<IActionResult> AddedEmployee()
         {
             ViewData["Authorized"] = "Admin";
-            var employees = await managementDataContextClass.tbEmployees.ToListAsync();
+            var employees = await employeeInterface.GetEmployees();
             return View(employees);
         }
         public async Task<IActionResult> AddEmployee(EmployeeModel model)
         {
             if (model != null)
             {
-                var isUnique = !await managementDataContextClass.tbEmployees.AnyAsync(e => e.EmpCode == model.EmpCode);
+                var isUnique = !await employeeInterface.checkuniqueniess(model.EmpCode);
                 if (!isUnique)
                 {
                     TempData["AlertScript"] = "Swal.fire('Error!', 'Employee code already exists.', 'error');";
@@ -90,8 +91,7 @@ namespace GroupWork.Controllers
                     AddedBy = 1,
                     AddedDate = DateTime.Now,
                 };
-                await managementDataContextClass.tbEmployees.AddAsync(employee);
-                await managementDataContextClass.SaveChangesAsync();
+                await employeeInterface.AddAsync(employee);
                 TempData["AlertScript"] = "Swal.fire('Success!', 'Employee Added Successfully', 'success');";
             }
             return RedirectToAction("ManageEmployee");
@@ -106,11 +106,10 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> DeleteEmployee(EmployeeModel employeeModel)
         {
-            var employee = await managementDataContextClass.tbEmployees.FindAsync(employeeModel.Id);
+            var employee = await employeeInterface.FindAsync(employeeModel.Id);
             if (employee != null)
             {
-                managementDataContextClass.tbEmployees.Remove(employee);
-                await managementDataContextClass.SaveChangesAsync();
+                await employeeInterface.Remove(employee);
                 TempData["AlertScript"] = "Swal.fire('Success!', 'Employee deleted.', 'success');";
             }
             return RedirectToAction("AddedEmployee");
@@ -123,7 +122,7 @@ namespace GroupWork.Controllers
             CheckPermission();
             if (EmpCode != null)
             {
-                var employee = await managementDataContextClass.tbEmployees.FirstOrDefaultAsync(e => e.EmpCode == EmpCode);
+                var employee = await employeeInterface.getEmployee(EmpCode);
                 if (employee != null)
                 {
                     return View(employee);
@@ -139,7 +138,7 @@ namespace GroupWork.Controllers
             ViewData["EmpCode"] = EmpCode;
             if (EmpCode != null)
             {
-                var employee = await managementDataContextClass.tbEmployees.FirstOrDefaultAsync(e => e.EmpCode == EmpCode);
+                var employee = await employeeInterface.getEmployee(EmpCode);
                 if (employee != null)
                 {
                     employee.EmpFirstNameEn = employeeModel.EmpFirstNameEn;
@@ -149,8 +148,7 @@ namespace GroupWork.Controllers
                     employee.EmpDOB = employeeModel.EmpDOB;
                     employee.UpdatedBy = 1;
                     employee.UpdatedDate = DateTime.Now;
-                    managementDataContextClass.tbEmployees.Update(employee);
-                    await managementDataContextClass.SaveChangesAsync();
+                    await employeeInterface.UpdateAsync(employee);
                     TempData["AlertScript"] = "Swal.fire('Success!', 'Your Info Updated Successfully', 'success');";
                 }
                 return RedirectToAction("ViewInfo");
@@ -166,7 +164,7 @@ namespace GroupWork.Controllers
             CheckPermission();
             if (EmpCode != null)
             {
-                var employee = await managementDataContextClass.tbEmployees.FirstOrDefaultAsync(e => e.EmpCode == EmpCode);
+                var employee = await employeeInterface.getEmployee(EmpCode);
                 if (employee != null)
                 {
                     return View(employee);

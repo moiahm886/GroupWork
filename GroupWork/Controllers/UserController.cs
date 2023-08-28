@@ -3,16 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using BCrypt.Net;
 using GroupWork.Data;
 using Microsoft.EntityFrameworkCore;
+using GroupWork.DAL;
 
 namespace GroupWork.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ManagementDataContextClass managementDataContextClass;
+        private readonly UserInterface userInterface;
+        private readonly EmployeeInterface employeeInterface;
 
-        public UserController(ManagementDataContextClass managementDataContextClass)
+        public UserController(UserInterface userInterface, EmployeeInterface employeeInterface)
         {
-            this.managementDataContextClass = managementDataContextClass;
+            this.userInterface = userInterface;
+            this.employeeInterface = employeeInterface;
         }
         public IActionResult RegistrationView()
         {
@@ -24,7 +27,7 @@ namespace GroupWork.Controllers
         }
         public async Task<IActionResult> ManageLogin(UserModel userModel)
         {
-            var user = managementDataContextClass.tbUsers.FirstOrDefault(u => u.UserName == userModel.UserName);
+            var user = await userInterface.GetUserByUsernameAsync(userModel.UserName);
             if (userModel.UserName == "Admin" && userModel.UserPassword == "Admin")
             {
                 ViewData["Authorized"] = "Admin";
@@ -32,7 +35,7 @@ namespace GroupWork.Controllers
             }
             else
             {
-                var User = await managementDataContextClass.tbUsers.FirstOrDefaultAsync(r => r.UserName == userModel.UserName);
+                var User = await userInterface.GetUserByUsernameAsync(userModel.UserName);
                 if (User == null)
                 {
                     ViewData["LoginResult"] = "User Does not exist or incorrect password";
@@ -53,8 +56,7 @@ namespace GroupWork.Controllers
                     if (user != null)
                     {
                         var EmpId = user.EmpId;
-                        var employeeExists = await managementDataContextClass.tbEmployees
-                        .AnyAsync(employee => employee.EmpCode == user.EmpId.ToString());
+                        var employeeExists = await employeeInterface.existingEmployee(EmpId);
                         if (employeeExists)
                         {
                             ViewData["Authorized"] = "Employee";
@@ -88,8 +90,9 @@ namespace GroupWork.Controllers
             ViewData["Authorized"] = "GuestUser";
             ViewData["Username"] = user;
             if (user != null) {
-                var obj = await managementDataContextClass.tbUsers.FirstOrDefaultAsync(u => u.UserName == user);
-                if (obj != null) {
+                var obj = userInterface.GetUserByUsernameAsync(user);
+                if (obj != null)
+                {
                     return View(obj);
                 }
             }
