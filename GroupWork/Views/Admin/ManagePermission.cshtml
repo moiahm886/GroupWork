@@ -47,6 +47,7 @@
         <thead>
             <tr>
                 <th style="border-bottom: 1px solid #ccc;">Role ID</th>
+                <th style="border-bottom: 1px solid #ccc;">Role Name</th>
                 <th style="border-bottom: 1px solid #ccc;">Screen ID</th>
                 <th style="border-bottom: 1px solid #ccc;">Menu ID</th>
                 <th style="border-bottom: 1px solid #ccc;">Can Read</th>
@@ -68,6 +69,7 @@
             {
                 <tr>
                     <td>@role.Id</td>
+                    <td>@role.Name</td>
                     <td>
                         @if (!Model.RolePermissions.ContainsKey(role.Id))
                         {
