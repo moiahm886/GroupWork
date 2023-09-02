@@ -52,6 +52,7 @@
             <thead>
                 <tr>
                     <th>EmpCode</th>
+                    <th>Emp Name</th>
                     <th>EmpDepartmentID</th>
                     <th>EmpSectionID</th>
                     <th>EmpFirstNameEn</th>
@@ -70,6 +71,7 @@
                 {
                     <tr>
                         <td name="EmpCode" value="@Model.Item2.EmpCode">@user.EmpId</td>
+                        <td name="UserName" value="@user.UserName">@user.UserName</td>
                         <td><input type="number" style="width: 60px;" name="EmpDepartmetId" value="@Model.Item2.EmpDepartmetId"></td>
                         <td><input type="number" style="width: 60px;" name="EmpSectionId" value="@Model.Item2.EmpSectionId"></td>
                         <td><input type="text" style="width: 100px;" name="EmpFirstNameEn" value="@Model.Item2.EmpFirstNameEn"></td>
