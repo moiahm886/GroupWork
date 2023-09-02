@@ -90,7 +90,7 @@ namespace GroupWork.Controllers
             ViewData["Authorized"] = "GuestUser";
             ViewData["Username"] = user;
             if (user != null) {
-                var obj = userInterface.GetUserByUsernameAsync(user);
+                var obj = await userInterface.GetUserByUsernameAsync(user);
                 if (obj != null)
                 {
                     return View(obj);

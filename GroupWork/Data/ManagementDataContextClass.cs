@@ -14,12 +14,20 @@ namespace GroupWork.Data
         public DbSet<CompanyModel> Company { get; set; }
         public DbSet<BranchModel> CompanyBranch { get; set; }
         public DbSet<EmployeeModel>tbEmployees { get; set; }
+        public DbSet<ExperienceModel> tbExperience { get; set; }
+        public DbSet<SocialMediaModel> tbEmployeeSocialMediaLinks { get; set; }
+        public DbSet<QualificationModel> tbQualification { get; set; }
+        public DbSet<SkillsModel> tbSkills { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("AUTH");
             modelBuilder.Entity<CompanyModel>().ToTable("Company", schema: "MNG");
             modelBuilder.Entity<BranchModel>().ToTable("CompanyBranch", schema: "MNG");
             modelBuilder.Entity<EmployeeModel>().ToTable("tbEmployees", schema: "HR");
+            modelBuilder.Entity<ExperienceModel>().ToTable("tbExperience", schema: "HR");
+            modelBuilder.Entity<SocialMediaModel>().ToTable("tbEmployeeSocialMediaLinks", schema: "HR");
+            modelBuilder.Entity<SkillsModel>().ToTable("tbSkills", schema: "HR");
+            modelBuilder.Entity<QualificationModel>().ToTable("tbQualification", schema: "HR");
             base.OnModelCreating(modelBuilder);
         }
     }

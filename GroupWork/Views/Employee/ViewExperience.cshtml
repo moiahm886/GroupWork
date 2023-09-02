@@ -1,0 +1,86 @@
+﻿@model GroupWork.Models.ExperienceModel
+@{
+    var Update = ViewData["Update"] as string;
+}
+<title>Experience Information</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .user-info-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .user-info-label {
+        font-weight: bolder;
+    }
+    .user-info-item {
+        margin-bottom: 10px;
+    }
+    .active {
+        color: green;
+    }
+    .inactive {
+        color: red;
+    }
+</style>
+<body>
+    <div class="user-info-container mt-4">
+        <h1 class="text-center mb-4">Experience Information</h1>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Experience ID:</span> @Model.Id
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Employee Code:</span> @Model.EmpId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Job Title:</span> @Model.EmpJobTitle
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Company Name:</span> @Model.EmpCompanyName
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Position ID:</span> @Model.EmpPostionId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Country ID:</span> @Model.EmpCountryId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Branch ID:</span> @Model.BranchId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Company ID:</span> @Model.CompanyId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Work Start Date:</span> @(Model.EmpWorkStartDate != DateTime.MinValue ? Model.EmpWorkStartDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Work End Date:</span> @(Model.EmpWorkEndDate != DateTime.MinValue ? Model.EmpWorkEndDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Added By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Added Date:</span> @(Model.AddedDate != DateTime.MinValue ? Model.AddedDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Updated By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Updated Date:</span> @(Model.UpdatedDate != DateTime.MinValue ? Model.UpdatedDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+    </div>
+    <form asp-controller="Employee" asp-action="ExperienceUpdatePage">
+        @if (Update == "Allow")
+        {
+            <div class="mt-4 d-flex justify-content-center">
+                <button class="btn btn-dark">Want To Update?</button>
+                <input type="hidden"  name="Id" value="@Model.Id">
+            </div>
+        }
+    </form>
+</body>

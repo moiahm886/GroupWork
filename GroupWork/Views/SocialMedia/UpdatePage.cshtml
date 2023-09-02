@@ -1,0 +1,98 @@
+﻿@model GroupWork.Models.SocialMediaModel
+@{
+    var Update = ViewData["Update"] as string;
+    var Delete = ViewData["Delete"] as string;
+}
+<h1 class="text-center mb-6 mt-2">Update Social Media Details</h1>
+<form asp-controller="SocialMedia" asp-action="DeleteSocials" method="post">
+    <div class="form-group row mb-3">
+        <label for="EmpId" class="col-sm-2 col-form-label">Employee ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpId" name="EmpId" value="@Model.EmpId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="FacebookLink" class="col-sm-2 col-form-label">Facebook Link:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="FacebookLink" name="FacebookLink" value="@Model.FacebookLink" maxlength="50">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TwitterLink" class="col-sm-2 col-form-label">Twitter Link:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="TwitterLink" name="TwitterLink" value="@Model.TwitterLink" maxlength="50">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="InstagramLink" class="col-sm-2 col-form-label">Instagram Link:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="InstagramLink" name="InstagramLink" value="@Model.InstagramLink" maxlength="50">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="LinkedinLink" class="col-sm-2 col-form-label">Linkedin Link:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="LinkedinLink" name="LinkedinLink" value="@Model.LinkedinLink" maxlength="50">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="WebsiteLink" class="col-sm-2 col-form-label">Website Link:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="WebsiteLink" name="WebsiteLink" value="@Model.WebsiteLink" maxlength="50">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="OtherLink" class="col-sm-2 col-form-label">Other Link:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="OtherLink" name="OtherLink" value="@Model.OtherLink" maxlength="50">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="CompanyId" class="col-sm-2 col-form-label">Company ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId" value="@Model.CompanyId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BranchId" class="col-sm-2 col-form-label">Branch ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BranchId" name="BranchId" value="@Model.BranchId" readonly>
+        </div>
+    </div>
+    <div class="mt-4 ml-5">
+        @if (Update != "Allow")
+        {
+
+            <button type="submit" class="btn btn-secondary" asp-controller="SocialMedia" asp-action="Update" disabled>Update</button>
+        }
+        else
+        {
+            <input type="hidden" name="EmpId" value="@Model.EmpId">
+            <button type="submit" class="btn btn-secondary" asp-controller="SocialMedia" asp-action="Update" asp-route-Id="@Model.Id">Update</button>
+        }
+        @if (Delete != "Allow")
+        {
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()" disabled>Delete</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        }
+    </div>
+</form>
+<style>
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

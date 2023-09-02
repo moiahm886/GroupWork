@@ -1,0 +1,120 @@
+﻿@model GroupWork.Models.QualificationModel
+@{
+    var Update = ViewData["Update"] as string;
+    var Delete = ViewData["Delete"] as string;
+}
+<h1 class="text-center mb-6 mt-2">Update Qualifications Details</h1>
+<form asp-controller="Qualification" asp-action="Add" method="post">
+    <div class="form-group row mb-3">
+        <label for="EmpId" class="col-sm-2 col-form-label">Employee ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpId" name="EmpId" value="@Model.EmpId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpDegreeName" class="col-sm-2 col-form-label">Degree Name:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpDegreeName" name="EmpDegreeName" value="@Model.EmpDegreeName" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpStartYear" class="col-sm-2 col-form-label">Start Year:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpStartYear" name="EmpStartYear" value="@Model.EmpStartYear" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpEndYear" class="col-sm-2 col-form-label">End Year:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpEndYear" name="EmpEndYear" value="@Model.EmpEndYear" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpInstituteName" class="col-sm-2 col-form-label">Institute Name:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpInstituteName" name="EmpInstituteName" value="@Model.EmpInstituteName" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpInstituteCountryId" class="col-sm-2 col-form-label">Country ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpInstituteCountryId" name="EmpInstituteCountryId" value="@Model.EmpInstituteCountryId" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpInstituteCityId" class="col-sm-2 col-form-label">City ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpInstituteCityId" name="EmpInstituteCityId" value="@Model.EmpInstituteCityId" required>
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="EmpObtaineGPAPercentage" class="col-sm-2 col-form-label">GPA Percentage:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpObtaineGPAPercentage" name="EmpObtaineGPAPercentage" value="@Model.EmpObtaineGPAPercentage" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpQuilficationTypeId" class="col-sm-2 col-form-label">Qualification ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpQuilficationTypeId" name="EmpQuilficationTypeId" value="@Model.EmpQuilficationTypeId" required>
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="EmpDescription" class="col-sm-2 col-form-label">Description:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpDescription" name="EmpDescription" value="@Model.EmpDescription" required>
+        </div>
+    </div>
+
+
+    <div class="form-group row mb-3">
+        <label for="CompanyId" class="col-sm-2 col-form-label">Company ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId" value="@Model.CompanyId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BranchId" class="col-sm-2 col-form-label">Branch ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BranchId" name="BranchId" value="@Model.BranchId" readonly>
+        </div>
+    </div>
+    <div class="mt-4 ml-5">
+        @if (Update != "Allow")
+        {
+
+            <button type="submit" class="btn btn-secondary" asp-controller="Qualification" asp-action="Update" disabled>Update</button>
+        }
+        else
+        {
+            <input type="hidden" name="EmpId" value="@Model.EmpId">
+            <button type="submit" class="btn btn-secondary" asp-controller="Qualification" asp-action="Update" asp-route-Id="@Model.Id">Update</button>
+        }
+        @if (Delete != "Allow")
+        {
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()" disabled>Delete</button>
+        }
+        else
+        {
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        }
+    </div>
+</form>
+<style>
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

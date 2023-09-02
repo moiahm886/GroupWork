@@ -41,7 +41,7 @@ namespace GroupWork.DAL
             return await managementDataContextClass.Company.FirstOrDefaultAsync(r => r.Id == ID);
         }
 
-        public async Task<CompanyModel> FindCompanyByID(int ID)
+        public async Task<CompanyModel> FindCompanyByID(int? ID)
         {
             return await managementDataContextClass.Company.FindAsync(ID);
         }

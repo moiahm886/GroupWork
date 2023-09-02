@@ -2,21 +2,21 @@
 using GroupWork.Data;
 using GroupWork.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
-
 namespace GroupWork.Controllers
 {
     public class EmployeeController : Controller
     {
+        private readonly CompanyInterface companyInterface;
         private readonly EmployeeInterface employeeInterface;
         private readonly PermissionInterface permissionInterface;
+        private readonly ExperienceInterface experienceInterface;
 
-        public EmployeeController(EmployeeInterface employeeInterface, PermissionInterface permissionInterface)
+        public EmployeeController(CompanyInterface companyInterface,EmployeeInterface employeeInterface, PermissionInterface permissionInterface,ExperienceInterface experienceInterface)
         {
+            this.companyInterface = companyInterface;
             this.employeeInterface = employeeInterface;
             this.permissionInterface = permissionInterface;
+            this.experienceInterface = experienceInterface;
         }
         public IActionResult CheckPermission()
         {
@@ -172,6 +172,108 @@ namespace GroupWork.Controllers
             }
             TempData["AlertScript"] = "Swal.fire('Error!', 'Employee not found.', 'error');";
             return View();
+        }
+        public async Task<IActionResult> AddExperience()
+        {
+            ViewData["Authorized"] = "Employee";
+            var EmpCode = HttpContext.Session.GetString("EmpCode");
+            ViewData["EmpCode"] = EmpCode;
+            if(EmpCode != null) {
+                var Employee = await employeeInterface.getEmployee(EmpCode);
+                var companyId = Employee.CompanyId;
+                var Company = await companyInterface.FindCompanyByID(companyId);
+                if (Company != null)
+                {
+                    return View((Employee, Company));
+                }
+            }
+            TempData["AlertScript"] = "Swal.fire('Error!', 'Employee not found.', 'error');";
+            return View();
+        }
+        public async Task<IActionResult> AddedExperience(ExperienceModel experienceModel)
+        {
+            var EmpCode = HttpContext.Session.GetString("EmpCode");
+            ViewData["EmpCode"] = EmpCode;
+            if (EmpCode != null) {
+                var Employee = await employeeInterface.getEmployee(EmpCode);
+                var experience = new ExperienceModel
+                {
+                    EmpId = Employee.Id,
+                    EmpJobTitle = experienceModel.EmpJobTitle,
+                    EmpCompanyName = experienceModel.EmpCompanyName,
+                    EmpPostionId = experienceModel.EmpPostionId,
+                    EmpCountryId = experienceModel.EmpCountryId,
+                    EmpWorkEndDate = experienceModel.EmpWorkEndDate,
+                    EmpWorkStartDate = experienceModel.EmpWorkStartDate,
+                    EmpResponsibilities = experienceModel.EmpResponsibilities,
+                    BranchId = experienceModel.BranchId,
+                    CompanyId = experienceModel.CompanyId,
+                    AddedDate = DateTime.Now,
+                    AddedBy = 1
+                };
+                await experienceInterface.AddExperience(experience);
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Experience Added Successfully', 'success');";
+                return RedirectToAction("AddExperience");
+            }
+            return View("AddExperience");
+        }
+        public async Task<IActionResult> ViewExperience()
+        {
+            CheckPermission();
+            ViewData["Authorized"] = "Employee";
+            var EmpCode = HttpContext.Session.GetString("EmpCode");
+            ViewData["EmpCode"] = EmpCode;
+            if (EmpCode != null)
+            {
+                var Employee = await employeeInterface.getEmployee(EmpCode);
+                var experience = await experienceInterface.GetExperienceByEmpId(Employee.Id);
+                if (experience != null)
+                {
+                    return View(experience);
+                }
+                else
+                {
+                    return RedirectToAction("AddExperience");
+                }
+                
+            }
+            TempData["AlertScript"] = "Swal.fire('Error!', 'Experience not found.', 'error');";
+            return View();
+        }
+        public async Task<IActionResult> ExperienceUpdatePage(int Id)
+        {
+            CheckPermission();
+            ViewData["Authorized"] = "Employee";
+            var EmpCode = HttpContext.Session.GetString("EmpCode");
+            ViewData["EmpCode"] = EmpCode;
+            var expereince = await experienceInterface.GetExperienceById(Id);
+            return View(expereince);
+        }
+        public async Task<IActionResult> UpdateExperience(ExperienceModel experienceModel,int Id)
+        {
+            ViewData["Authorized"] = "Employee";
+            var EmpCode = HttpContext.Session.GetString("EmpCode");
+            ViewData["EmpCode"] = EmpCode;
+            var experience = await experienceInterface.GetExperienceById(Id);
+            if (experience != null)
+            {
+                experience.Id = Id;
+                experience.EmpId = experienceModel.EmpId;
+                experience.EmpJobTitle = experienceModel.EmpJobTitle;
+                experience.EmpCompanyName = experienceModel.EmpCompanyName;
+                experience.EmpPostionId = experienceModel.EmpPostionId;
+                experience.EmpCountryId = experienceModel.EmpCountryId;
+                experience.EmpWorkEndDate = experienceModel.EmpWorkEndDate;
+                experience.EmpWorkStartDate = experienceModel.EmpWorkStartDate;
+                experience.EmpResponsibilities = experienceModel.EmpResponsibilities;
+                experience.BranchId = experienceModel.BranchId;
+                experience.CompanyId = experienceModel.CompanyId;
+                experience.UpdatedDate = DateTime.Now;
+                experience.UpdatedBy = 1;
+                await experienceInterface.UpdateAsync(experience);
+                TempData["AlertScript"] = "Swal.fire('Success!', 'Experience Updated Successfully', 'success');";
+            }
+            return RedirectToAction("ExperienceUpdatePage", new { Id = Id });
         }
     }
 }

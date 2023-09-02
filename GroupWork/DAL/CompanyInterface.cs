@@ -6,7 +6,7 @@ namespace GroupWork.DAL
     {
         Task<List<CompanyModel>> GetCompany();
         Task AddCompany(CompanyModel company);
-        Task<CompanyModel> FindCompanyByID(int ID);
+        Task<CompanyModel> FindCompanyByID(int? ID);
         void RemoveCompany(CompanyModel company);
         Task savechanges();
         Task<List<BranchModel>> FindBranches(int ID);

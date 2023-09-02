@@ -35,7 +35,7 @@
                 <label for="EmpSectionId" class="form-label">Birthday</label>
                 <input type="date" class="form-control custom-input" name="EmpDOB" id="EmpDOB" value='@(Model.EmpDOB.HasValue ? Model.EmpDOB.Value.ToString("yyyy-MM-dd") : "")' />
             </div>
-            <div class="mt-4 ml-5">
+            <div class="mt-4">
                 @if (Update != "Allow")
                 {
                     <button type="submit" class="btn btn-secondary" asp-controller="Employee" asp-action="UpdateEmployee" disabled>Update</button>

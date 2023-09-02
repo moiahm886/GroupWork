@@ -1,0 +1,81 @@
+﻿@model (GroupWork.Models.EmployeeModel,GroupWork.Models.CompanyModel)
+<h1 class="text-center mb-4">Add Experience</h1>
+<form asp-controller="Employee" asp-action="AddedExperience">
+    <div class="form-group row mb-3">
+        <label for="EmpJobTitle" class="col-sm-2 col-form-label">Job Title:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpJobTitle" name="EmpJobTitle" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpPostionId" class="col-sm-2 col-form-label">Company Name:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpCompanyName" name="EmpCompanyName" value="@Model.Item2.Name" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpPostionId" class="col-sm-2 col-form-label">Position Id:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpPostionId" name="EmpPostionId" required>
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="EmpCountryId" class="col-sm-2 col-form-label">Country Id:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpCountryId" name="EmpCountryId" value="@Model.Item2.CountryId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpWorkStartDate" class="col-sm-2 col-form-label">Work Start Date:</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control custom-input" id="EmpWorkStartDate" name="EmpWorkStartDate" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpWorkEndDate" class="col-sm-2 col-form-label">Work End Date:</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control custom-input" id="EmpWorkEndDate" name="EmpWorkEndDate" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="EmpResponsibilities" class="col-sm-2 col-form-label">Responsibilities:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="EmpResponsibilities" name="EmpResponsibilities" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="CompanyId" class="col-sm-2 col-form-label">Company ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId" value="@Model.Item1.CompanyId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BranchId" class="col-sm-2 col-form-label">Branch ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BranchId" name="BranchId" value="@Model.Item1.BranchId" readonly>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-dark">Add</button>
+        <input type="hidden" name="EmpCompanyName" value="@Model.Item2.Name" />
+        <input type="hidden" name="CompanyId" value="@Model.Item1.CompanyId" />
+        <input type="hidden" name="BranchId" value="@Model.Item1.BranchId" />
+    </div>
+</form>
+<style>
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

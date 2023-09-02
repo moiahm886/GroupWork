@@ -1,0 +1,84 @@
+﻿@model GroupWork.Models.SocialMediaModel
+@{
+    var Update = ViewData["Update"] as string;
+}
+<title>Social Media Information</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .user-info-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info-label {
+        font-weight: bolder;
+    }
+
+    .user-info-item {
+        margin-bottom: 10px;
+    }
+
+</style>
+<body>
+    <div class="user-info-container mt-4">
+        <h1 class="text-center mb-4">Social Media Information</h1>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Social Media ID:</span> @Model.Id
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Employee ID:</span> @Model.EmpId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Facebook Link:</span> @Model.FacebookLink
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Twitter Link:</span> @Model.TwitterLink
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Instagram Link:</span> @Model.InstagramLink
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Linkedin Link:</span> @Model.LinkedinLink
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Website Link:</span> @Model.WebsiteLink
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Other Link:</span> @Model.OtherLink
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Branch ID:</span> @Model.BranchId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Company ID:</span> @Model.CompanyId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Added By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Added Date:</span> @(Model.AddedDate != DateTime.MinValue ? Model.AddedDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Updated By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Updated Date:</span> @(Model.UpdatedDate != DateTime.MinValue ? Model.UpdatedDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+    </div>
+    <form asp-controller="SocialMedia" asp-action="UpdatePage">
+        @if (Update == "Allow")
+        {
+            <div class="mt-4 d-flex justify-content-center">
+                <button class="btn btn-dark">Want To Update?</button>
+                <input type="hidden" name="Id" value="@Model.Id">
+            </div>
+        }
+    </form>
+</body>

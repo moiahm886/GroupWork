@@ -1,0 +1,101 @@
+﻿@model GroupWork.Models.QualificationModel
+@{
+    var Update = ViewData["Update"] as string;
+}
+<title>Social Media Information</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .user-info-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info-label {
+        font-weight: bolder;
+    }
+
+    .user-info-item {
+        margin-bottom: 10px;
+    }
+
+</style>
+<body>
+    <div class="user-info-container mt-4">
+        <h1 class="text-center mb-4">Qualification Information</h1>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Qualification ID:</span> @Model.Id
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Employee ID:</span> @Model.EmpId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Degree Name:</span> @Model.EmpDegreeName
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Start Year:</span> @Model.EmpStartYear
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">End Year:</span> @Model.EmpEndYear
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Institute Name:</span> @Model.EmpInstituteName
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Institute Country ID:</span> @Model.EmpInstituteCountryId
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Institute City ID:</span> @Model.EmpInstituteCityId
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">GPA Percentage:</span> @Model.EmpObtaineGPAPercentage
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Qualification Type ID:</span> @Model.EmpQuilficationTypeId
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Description:</span> @Model.EmpDescription
+        </div>
+
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Branch ID:</span> @Model.BranchId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Company ID:</span> @Model.CompanyId
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Added By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Added Date:</span> @(Model.AddedDate != DateTime.MinValue ? Model.AddedDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Updated By:</span> @Model.AddedBy
+        </div>
+        <div class="user-info-item mb-2">
+            <span class="user-info-label">Updated Date:</span> @(Model.UpdatedDate != DateTime.MinValue ? Model.UpdatedDate.ToString("dd-MMM-yyyy") : "N/A")
+        </div>
+    </div>
+    <form asp-controller="Qualification" asp-action="UpdatePage">
+        @if (Update == "Allow")
+        {
+            <div class="mt-4 d-flex justify-content-center">
+                <button class="btn btn-dark">Want To Update?</button>
+                <input type="hidden" name="Id" value="@Model.Id">
+            </div>
+        }
+    </form>
+</body>
