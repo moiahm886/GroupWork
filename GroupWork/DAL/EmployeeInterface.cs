@@ -14,6 +14,5 @@ namespace GroupWork.DAL
         Task<List<EmployeeModel>> GetEmployees();
         Task<bool> checkuniqueniess(string EmpCode);
         Task<EmployeeModel> getEmployee(string Empcode);
-        
     }
 }

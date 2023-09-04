@@ -1,0 +1,92 @@
+﻿@model GroupWork.Models.EmployeeModel
+<h1 class="text-center mb-6 mt-2">Add Salary Details</h1>
+<form asp-controller="Salary" asp-action="Add" method="post">
+    <div class="form-group row mb-3">
+        <label for="EmpId" class="col-sm-2 col-form-label">Employee ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpId" name="EmpId" value="@Model.Id" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="SalaryMonthYear" class="col-sm-2 col-form-label">Salary Month/Year:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="SalaryMonthYear" name="SalaryMonthYear"  required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="Date" class="col-sm-2 col-form-label">Date:</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control custom-input" id="Date" name="Date" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BasicSalary" class="col-sm-2 col-form-label">Basic Salary:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BasicSalary" name="BasicSalary" required>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TotalDeduction" class="col-sm-2 col-form-label">Total Deduction:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TotalDeduction" name="TotalDeduction" required step="0.01">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TotalAllowance" class="col-sm-2 col-form-label">Total Allowance:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TotalAllowance" name="TotalAllowance" required step="0.01">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TotalSalary" class="col-sm-2 col-form-label">Total Salary:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TotalSalary" name="TotalSalary" required step="0.01">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TaxDeduction" class="col-sm-2 col-form-label">Tax Deduction:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TaxDeduction" name="TaxDeduction" required step="0.01">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="ProvidentFundDeduction" class="col-sm-2 col-form-label">Provident Fund Deduction:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="ProvidentFundDeduction" name="ProvidentFundDeduction" required step="0.01">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="CompanyId" class="col-sm-2 col-form-label">Company ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId" value="@Model.CompanyId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BranchId" class="col-sm-2 col-form-label">Branch ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BranchId" name="BranchId" value="@Model.BranchId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3 mt-4">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <button type="submit" class="btn btn-dark">Add Qualifications</button>
+        </div>
+    </div>
+</form>
+<style>
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .custom-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+</style>

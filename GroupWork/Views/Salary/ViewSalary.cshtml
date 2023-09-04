@@ -1,0 +1,98 @@
+﻿@model GroupWork.Models.SalaryModel
+<h1 class="text-center mb-6 mt-2">View Salary Details</h1>
+<form asp-controller="Salary" asp-action="DeleteSalary" asp-route-Id="@Model.Id" id="deleteForm" method="post">
+    <div class="form-group row mb-3">
+        <label for="EmpId" class="col-sm-2 col-form-label">Employee ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="EmpId" name="EmpId" value="@Model.EmpId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="SalaryMonthYear" class="col-sm-2 col-form-label">Salary Month/Year:</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control custom-input" id="SalaryMonthYear" name="SalaryMonthYear" value="@Model.SalaryMonthYear" >
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="Date" class="col-sm-2 col-form-label">Date:</label>
+        <div class="col-sm-5">
+            <input type="datetime" class="form-control custom-input" id="Date" name="Date" value="@Model.Date" >
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BasicSalary" class="col-sm-2 col-form-label">Basic Salary:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BasicSalary" name="BasicSalary" value="@Model.BasicSalary">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TotalDeduction" class="col-sm-2 col-form-label">Total Deduction:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TotalDeduction" name="TotalDeduction" value="@Model.TotalDeduction">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TotalAllowance" class="col-sm-2 col-form-label">Total Allowance:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TotalAllowance" name="TotalAllowance" value="@Model.TotalAllowance">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TotalSalary" class="col-sm-2 col-form-label">Total Salary:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TotalSalary" name="TotalSalary" value="@Model.TotalSalary">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="TaxDeduction" class="col-sm-2 col-form-label">Tax Deduction:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="TaxDeduction" name="TaxDeduction" value="@Model.TaxDeduction">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="ProvidentFundDeduction" class="col-sm-2 col-form-label">Provident Fund Deduction:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="ProvidentFundDeduction" name="ProvidentFundDeduction" value="@Model.ProvidentFundDeduction" >
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="CompanyId" class="col-sm-2 col-form-label">Company ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="CompanyId" name="CompanyId" value="@Model.CompanyId" readonly>
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="BranchId" class="col-sm-2 col-form-label">Branch ID:</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control custom-input" id="BranchId" name="BranchId" value="@Model.BranchId" readonly>
+        </div>
+    </div>
+    <div class="mt-4 ml-5">
+            <input type="hidden" name="EmpId" value="@Model.EmpId">
+            <button type="submit" class="btn btn-secondary" asp-controller="Salary" asp-action="Update" asp-route-Id="@Model.Id">Update</button>
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+</form>
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this company?")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>
+<style>
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .custom-input:focus {
+         border-color: #80bdff;
+         outline: 0;
+         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+</style>

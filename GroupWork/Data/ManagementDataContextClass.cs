@@ -18,6 +18,7 @@ namespace GroupWork.Data
         public DbSet<SocialMediaModel> tbEmployeeSocialMediaLinks { get; set; }
         public DbSet<QualificationModel> tbQualification { get; set; }
         public DbSet<SkillsModel> tbSkills { get; set; }
+        public DbSet<SalaryModel> Salary { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("AUTH");
@@ -28,6 +29,7 @@ namespace GroupWork.Data
             modelBuilder.Entity<SocialMediaModel>().ToTable("tbEmployeeSocialMediaLinks", schema: "HR");
             modelBuilder.Entity<SkillsModel>().ToTable("tbSkills", schema: "HR");
             modelBuilder.Entity<QualificationModel>().ToTable("tbQualification", schema: "HR");
+            modelBuilder.Entity<SalaryModel>().ToTable("Salary", schema: "PAY");
             base.OnModelCreating(modelBuilder);
         }
     }

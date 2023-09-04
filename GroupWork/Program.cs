@@ -19,6 +19,7 @@ builder.Services.AddScoped<ExperienceInterface, ExperienceRepo>();
 builder.Services.AddScoped<SocialInterface, SocialRepo>();
 builder.Services.AddScoped<SkillsInterface, SkillsRepo>();
 builder.Services.AddScoped<QualificationInterface, QualificationRepo>();
+builder.Services.AddScoped<SalaryInterface, SalaryRepo>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

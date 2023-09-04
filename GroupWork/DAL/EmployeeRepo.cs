@@ -2,6 +2,7 @@
 using GroupWork.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace GroupWork.DAL
 {
@@ -48,7 +49,6 @@ namespace GroupWork.DAL
         {
             return await managementDataContextClass.tbEmployees.FirstOrDefaultAsync(e => e.EmpCode == EmpCode);
         }
-
 
         public async Task<List<EmployeeModel>> GetEmployees()
         {
