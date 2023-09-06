@@ -40,6 +40,21 @@
         <button class="mt-3 btn btn-dark">Add Company</button>
     </form>
 </div>
+
+<form asp-controller="Admin" asp-action="ManageCompany" method="get">
+    <label for="countrySelect">Select a Country:</label>
+    <select id="countrySelect" name="Id">
+        <option value="0">All</option>
+        <option value="1">Pakistan</option>
+        <option value="2">United States</option>
+        <option value="3">United Kingdom</option>
+        <option value="4">Canada</option>
+        <option value="5">Australia</option>
+        <option value="6">Estonia</option>
+    </select>
+    <button type="submit" class="btn btn-dark">Search</button>
+</form>
+
 <form id="deleteForm" style="overflow:auto" asp-controller="Admin" asp-action="DeleteCompany">
     <table class="table" style="border: 1px solid #F5F5DC; border-collapse: collapse; width: 100%; border-spacing: 0;">
         <thead>

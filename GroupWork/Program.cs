@@ -15,6 +15,7 @@ builder.Services.AddScoped<UserInterface, UserRepository>();
 builder.Services.AddScoped<EmployeeInterface, EmployeeRepo>();
 builder.Services.AddScoped<PermissionInterface, PermissionRepo>();
 builder.Services.AddScoped<CompanyInterface, CompanyRepo>();
+builder.Services.AddScoped<LookupInterface, LookupRepo>();
 builder.Services.AddScoped<ExperienceInterface, ExperienceRepo>();
 builder.Services.AddScoped<SocialInterface, SocialRepo>();
 builder.Services.AddScoped<SkillsInterface, SkillsRepo>();

@@ -15,8 +15,8 @@
         public string BankIban { get; set; }
         public int IsActive { get; set; }
         public int AddedBy { get; set; }
-        public DateTime AddedDate { get; set; }
+        public DateTime AddedDate { get; set; } = DateTime.Now;
         public int UpdatedBy { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
     }
 }

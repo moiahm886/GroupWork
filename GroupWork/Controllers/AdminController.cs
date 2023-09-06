@@ -14,12 +14,14 @@ namespace GroupWork.Controllers
         private readonly UserInterface userInterface;
         private readonly PermissionInterface permissionInterface;
         private readonly CompanyInterface companyInterface;
+        private readonly LookupInterface lookupInterface;
 
-        public AdminController(UserInterface userInterface,PermissionInterface permissionInterface, CompanyInterface companyInterface )
+        public AdminController(UserInterface userInterface,PermissionInterface permissionInterface, CompanyInterface companyInterface,LookupInterface lookupInterface )
         {
             this.userInterface = userInterface;
             this.permissionInterface = permissionInterface;
             this.companyInterface = companyInterface;
+            this.lookupInterface = lookupInterface;
         }
         public async Task<IActionResult> Users(UserModel userModel)
         {
@@ -158,11 +160,19 @@ namespace GroupWork.Controllers
             }
             return RedirectToAction("ManageUsers");
         }
-        public async Task<IActionResult> ManageCompany()
+        public async Task<IActionResult> ManageCompany(int Id)
         {
             ViewData["Authorized"] = "Admin";
-            var company = await companyInterface.GetCompany();
-            return View(company);
+            if (Id == 0)
+            {
+                var company = await companyInterface.GetCompany();
+                return View(company);
+            }
+            else
+            {
+                var company = await companyInterface.GetCompanyListByCountryAsync(Id);
+                return View(company);
+            }
         }
         public IActionResult AddCompany()
         {
@@ -184,17 +194,32 @@ namespace GroupWork.Controllers
                 BankName = companyModel.BankName,
                 BankIban = companyModel.BankIban,
                 IsActive = companyModel.IsActive,
-                AddedBy = companyModel.AddedBy,
+                AddedBy = 1,
                 AddedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
+                UpdatedBy = 1,
             };
             await companyInterface.AddCompany(Company);
             TempData["AlertScript"] = "Swal.fire('Success!', 'Company Added Successfully', 'success');";
+            var lookup = new LookupModel
+            {
+                LookupId = 1,
+                LookupName = "Countries",
+                IsActive = 1,
+                TypeCode = Company.CountryId,
+                AddedBy = 1,
+                AddedDate = DateTime.Now,
+                UpdatedBy = 1,
+                UpdatedDate = DateTime.Now,
+                CompanyId = Company.Id,
+                BranchId = 1,
+            };
+            await lookupInterface.AddAsync(lookup);
             return RedirectToAction("ManageCompany");
         }
         public async Task<IActionResult> DeleteCompany(int ID)
         {
             var company = await companyInterface.FindCompanyByID(ID);
-
             if (company != null)
             {
                 companyInterface.RemoveCompany(company);
@@ -203,12 +228,17 @@ namespace GroupWork.Controllers
                 {
                     companyInterface.RemoveBranches(branches);
                 }
+                var lookup = await lookupInterface.FindByCompanyIdAsync(ID);
+                if (lookup != null)
+                {
+                    await lookupInterface.DeleteAsync(lookup);
+                }
+
                 await companyInterface.savechanges();
                 TempData["AlertScript"] = "Swal.fire('Success!', 'Company Deleted Successfully', 'success');";
             }
             return RedirectToAction("ManageCompany");
         }
-
         public IActionResult ManageEmployees()
         {
             ViewData["Authorized"] = "Admin";

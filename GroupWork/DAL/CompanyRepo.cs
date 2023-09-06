@@ -56,6 +56,14 @@ namespace GroupWork.DAL
             return await managementDataContextClass.Company.ToListAsync();
         }
 
+        public async Task<List<CompanyModel>> GetCompanyListByCountryAsync(int Id)
+        {
+            var companies = await managementDataContextClass.Company
+            .Where(c => c.CountryId == Id)
+            .ToListAsync();
+            return companies;
+        }
+
         public async Task RemoveBranch(BranchModel branch)
         {
             managementDataContextClass.CompanyBranch.Remove(branch);

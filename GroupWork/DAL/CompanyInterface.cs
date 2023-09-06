@@ -4,6 +4,7 @@ namespace GroupWork.DAL
 {
     public interface CompanyInterface
     {
+        Task<List<CompanyModel>> GetCompanyListByCountryAsync(int Id);
         Task<List<CompanyModel>> GetCompany();
         Task AddCompany(CompanyModel company);
         Task<CompanyModel> FindCompanyByID(int? ID);
